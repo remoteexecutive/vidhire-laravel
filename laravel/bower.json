@@ -1,0 +1,16 @@
+{
+  "name": "laravel",
+  "version": "0.0.0",
+  "description": "Bower Test",
+  "keywords": [
+    "Test"
+  ],
+  "authors": [
+    "Jexter Dean Buenaventura"
+  ],
+  "license": "MIT",
+  "directory": "vendor/bower_components",
+  "dependencies": {
+    "bootstrap-less": "~3.3.4"
+  }
+}
