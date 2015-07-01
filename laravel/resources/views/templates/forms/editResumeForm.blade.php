@@ -174,6 +174,7 @@
                             <input type="hidden" class="text" name="latlng" id="geolocation-latLng" value="{{ $resumes->latlng }}">
                         </p>
                     </div>
+                    <div id="googleMap" style="width:100%;height:380px;"></div>
                     <script type="text/javascript">
                         //For Google Maps
                         var geocoder;
@@ -220,16 +221,16 @@
                                     alert('Geocode was not successful for the following reason: ' + status);
                                 }
                             });
-
+                            google.maps.event.addDomListener(window, 'load', initialize);
                         }
                         //google.maps.event.addDomListener(window, 'load', initialize);
 
                     </script>
 
-                    <div id="googleMap" style="width:100%;height:380px;"></div>
+                    
 
 
-                    <h2>Skills and Educations</h2>
+                    <h2>Skills and Education</h2>
 
                     <legend>Overall Average, Last Year of Studies</legend>
                     

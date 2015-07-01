@@ -19,15 +19,11 @@ Route::get('/', ['as' => 'home', function () {
     return view('home');
 }]);
 
-Route::get('/dashboard',function(){
-   return view('dashboard'); 
-});
+/*Get the dashboard*/
+Route::get('/dashboard',['as' => 'dashboard','uses' =>'ShowController@show']);
 
-Route::get('/dashboard/{name}/{user}',['as' => 'dashboard',function($name,$user){
-   return view('dashboard',['name' => $name,'user' => $user]); 
-}]);
 
-// Authentication routes...
+/*Authentication routes*/
 Route::get('auth/login',function(){
     return view('auth/login');
 });
@@ -35,22 +31,33 @@ Route::get('auth/login',function(){
 Route::post('auth/login', 'UserController@login');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
-// Registration routes...
+/*Registration routes*/
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'UserController@register');
 
-//Edit Forms
+/*Edit Forms*/
 //Job
-Route::get('/edit-job-form',function(){
-   return view('templates/forms/editJobForm'); 
-});
+Route::get('/edit-job-form/{id?}','EditController@getJob');
 //Resume
 Route::get('/edit-resume-form','EditController@getResume');
+//Invite
+Route::get('/invite-to-job-form/{id?}','EditController@getInviteToJob');
 
-//Edit Actions
+
+/*View*/
+//Resume
+
+Route::get('/view-resume/{id}','ShowController@viewResume');
+
+//Job
+Route::get('/view-job/{id}','ShowController@viewJob');
+
+/*Edit Actions*/
+Route::post('/submit-job','EditController@submitJob');
 Route::post('/edit-job','EditController@editJob');
 Route::post('/edit-resume','EditController@editResume');
 
-//Show
-//Resumes
-//Route::get('/show-resume','ShowController@showResume');
+/*Invite User to a Job*/
+Route::post('/invite-to-job','EditController@inviteToJob');
+/*Unlink from a Job*/
+Route::get('/unlink-from-job/{resume_id}/{job_id}','EditController@unlinkFromJob');

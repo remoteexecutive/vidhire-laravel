@@ -32,9 +32,13 @@ class UserController extends Controller {
 
         if (Auth::attempt(['username' => $username, 'password' => $pass])) {
 
-            $users = DB::table('users')->where('username', $username)->first();
-
-            return redirect()->route('dashboard', ['name' => $users->first_name, 'user' => $users->user_type]);
+            //$users = DB::table('users')->where('username', $username)->first();
+            
+            //return redirect()->route('dashboard', ['name' => $users->first_name, 'user' => $users->user_type]);
+            //return view('dashboard',['name' => $users->first_name, 'user' => $users->user_type,'resume' => $resume]);
+            //return redirect()->route('dashboard',['name' => $users->first_name, 'user' => $users->user_type]);
+            return redirect()->route('dashboard');
+            
         } else {
             return redirect()->route('home');
         }
@@ -68,7 +72,6 @@ class UserController extends Controller {
             $users = DB::table('users')->where('username', $username)->first();
 
             if ($user_type == 'Jobseeker') {
-
 
                 //Upon Registration, 
                 DB::table('resume')->insert(

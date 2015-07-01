@@ -21,7 +21,7 @@
         <div class="tab-content">
 
             <div id="jobseeker-resume" class="tab-pane fade in active dashboard-tab-pane">
-                @include('templates.show.resume');
+                @include('templates.show.resume')
             </div>
 
             <div id="jobseeker-jobs" class="tab-pane fade in dashboard-tab-pane">

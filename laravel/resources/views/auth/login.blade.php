@@ -1,6 +1,6 @@
 <!-- resources/views/auth/login.blade.php -->
 
-<form action="/auth/login" method="post" class="account_form" id="login-form">
+<form action="auth/login" method="post" class="account_form" id="login-form">
     
     {!! csrf_field() !!}
     

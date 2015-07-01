@@ -22,49 +22,11 @@
         <div class="tab-content">
 
             <div id="employer-statuses" class="tab-pane fade in dashboard-tab-pane">
-                <ol class="resume-statuses">
-                    <li><a href="http://vidhire.net/resume/group/2nd-highest-rated/">2nd Highest Rated</a></li>
-                    <li><a href="http://vidhire.net/resume/group/check-for-red-flags/">Check For Red Flags</a></li>
-                    <li><a href="http://vidhire.net/resume/group/check-reference/">Check Reference</a></li>
-                    <li><a href="http://vidhire.net/resume/group/completed-evaluation/">Completed Evaluation</a></li>
-                    <li><a href="http://vidhire.net/resume/group/evaluate/">Evaluate</a></li>
-                    <li><a href="http://vidhire.net/resume/group/fast-tracked/">Fast Tracked</a></li>
-                    <li><a href="http://vidhire.net/resume/group/highest-rated/">Highest Rated</a></li>
-                    <li><a href="http://vidhire.net/resume/group/no-red-flags/">No Red Flags</a></li>
-                    <li><a href="http://vidhire.net/resume/group/no-video/">No Video</a></li>
-                    <li><a href="http://vidhire.net/resume/group/pick/">Pick</a></li>
-                    <li><a href="http://vidhire.net/resume/group/references-checked/">References Checked</a></li>
-                    <li><a href="http://vidhire.net/resume/group/standard-tracked/">Standard Tracked</a></li>
-                    <li><a href="http://vidhire.net/resume/group/video-evaluated/">Video Evaluated</a></li>
-                </ol>            
+               
             </div>
 
             <div id="employer-skills" class="tab-pane fade in dashboard-tab-pane">
 
-                <ol class="job-tags">
-                    <li><a href="http://vidhire.net/resume/speciality/access/">access</a></li>
-                    <li><a href="http://vidhire.net/resume/speciality/c/">c++</a></li>
-                    <li><a href="http://vidhire.net/resume/speciality/c-c/">c++.C#</a></li>
-                    <li><a href="http://vidhire.net/resume/speciality/editor/">Editor</a></li>
-                    <li><a href="http://vidhire.net/resume/speciality/excel/">excel</a></li>
-                    <li><a href="http://vidhire.net/resume/speciality/flash/">flash</a></li>
-                    <li><a href="http://vidhire.net/resume/speciality/html/">HTML</a></li>
-                    <li><a href="http://vidhire.net/resume/speciality/illustrator/">Illustrator</a></li>
-                    <li><a href="http://vidhire.net/resume/speciality/java/">java</a></li>
-                    <li><a href="http://vidhire.net/resume/speciality/jquery/">JQuery</a></li>
-                    <li><a href="http://vidhire.net/resume/speciality/linux/">linux</a></li>
-                    <li><a href="http://vidhire.net/resume/speciality/oracle/">oracle</a></li>
-                    <li><a href="http://vidhire.net/resume/speciality/photoshop/">Photoshop</a></li>
-                    <li><a href="http://vidhire.net/resume/speciality/php/">PHP</a></li>
-                    <li><a href="http://vidhire.net/resume/speciality/programming/">Programming</a></li>
-                    <li><a href="http://vidhire.net/resume/speciality/public-speaking/">Public Speaking</a></li>
-                    <li><a href="http://vidhire.net/resume/speciality/red-hat/">red hat</a></li>
-                    <li><a href="http://vidhire.net/resume/speciality/researcher/">Researcher</a></li>
-                    <li><a href="http://vidhire.net/resume/speciality/sales-manager/">Sales Manager</a></li>
-                    <li><a href="http://vidhire.net/resume/speciality/sql/">SQL</a></li>
-                    <li><a href="http://vidhire.net/resume/speciality/team-management/">Team Management</a></li>
-                    <li><a href="http://vidhire.net/resume/speciality/test/">Test</a></li>
-                </ol>
 
             </div>
 
@@ -139,9 +101,7 @@
             </div>
 
             <div id="employer-jobs" class="tab-pane fade in dashboard-tab-pane">
-
-
-
+                @include('templates.show.listJob')
             </div>
 
             <div id="discussions" class="tab-pane fade in dashboard-tab-pane">
@@ -149,7 +109,7 @@
             </div>
 
             <div id="employer-evaluation" class="tab-pane fade in active dashboard-tab-pane">
-
+                    @include('templates.show.listResume')
             </div>
 
         </div>

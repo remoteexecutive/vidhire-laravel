@@ -1,5 +1,5 @@
 <!-- resources/views/auth/register.blade.php -->
-<form action="/auth/register" method="post" class="account_form" name="registerform" id="register-form">
+<form action="auth/register" method="post" class="account_form" name="registerform" id="register-form">
     
     {!! csrf_field() !!}
     
