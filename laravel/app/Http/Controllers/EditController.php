@@ -23,7 +23,7 @@ class EditController extends Controller {
         $company = $request->input('company');
         $website = $request->input('website');
         $location = $request->input('location');
-        $logo = $request->file('logo');
+        
         $job_title = $request->input('job_title');
         $job_type = $request->input('job_type');
         $job_category = $request->input('job_category');
@@ -33,16 +33,22 @@ class EditController extends Controller {
         //User Message
         $message;
 
-         //For File Upload
-        $logo_save = $logo->move('uploads\\' . $user_id, $logo->getClientOriginalName());
-        
+        //For File Upload
+        if ($request->hasFile('logo')) {
+            $logo = $request->file('logo');
+            $logo_save = $logo->move('uploads\\' . $user_id, $logo->getClientOriginalName());
+            $logo_path = $logo_save->getPathname();
+        } else {
+            $logo_path = "";
+        }
+
         DB::table('job')->insert(
                 [
                     'user_id' => $user_id,
                     'company' => $company,
                     'website' => $website,
                     'location' => $location,
-                    'logo' => $logo_save->getPathname(),
+                    'logo' => $logo_path,
                     'job_title' => $job_title,
                     'job_type' => $job_type,
                     'job_category' => $job_category,
@@ -72,6 +78,15 @@ class EditController extends Controller {
 
         //For File Upload
         $logo_save = $logo->move('uploads\\' . $user_id, $logo->getClientOriginalName());
+        
+        //For File Upload
+        if ($request->hasFile('logo')) {
+            $logo = $request->file('logo');
+            $logo_save = $logo->move('uploads\\' . $user_id, $logo->getClientOriginalName());
+            $logo_path = $logo_save->getPathname();
+        } else {
+            $logo_path = DB::table('job')->where('id', $job_id)->pluck('logo');
+        }
 
 
         DB::table('job')->where('id', $job_id)
@@ -81,7 +96,7 @@ class EditController extends Controller {
                             'company' => $company,
                             'website' => $website,
                             'location' => $location,
-                            'logo' => $logo_save->getPathname(),
+                            'logo' => $logo_path,
                             'job_title' => $job_title,
                             'job_type' => $job_type,
                             'job_category' => $job_category,
@@ -113,9 +128,7 @@ class EditController extends Controller {
         $phone = $request->input('phone');
         $mobile = $request->input('mobile');
         $skype = $request->input('skype');
-        $resume_photo = $request->file('resume_photo');
-        $resume_doc = $request->file('resume_doc');
-        $additional_doc = $request->file('additional_doc');
+
         $overall_average = $request->input('overall_average');
         $transcripts = $request->input('transcripts');
         $degree = $request->input('degree');
@@ -125,16 +138,31 @@ class EditController extends Controller {
         $interview_video_link = $request->input('interview_video_link');
 
         //For File Uploads
-        if ($resume_photo->isFile()) {
+
+        if ($request->hasFile('resume_photo')) {
+            $resume_photo = $request->file('resume_photo');
             $resume_photo_save = $resume_photo->move('uploads\\' . $user_id, $resume_photo->getClientOriginalName());
+            $resume_photo_path = $resume_photo_save->getPathname();
+        } else {
+            $resume_photo_path = DB::table('resume')->where('user_id', $user_id)->pluck('resume_photo');
         }
 
-        if ($resume_doc->isFile()) {
+        if ($request->hasFile('resume_doc')) {
+            $resume_doc = $request->file('resume_doc');
             $resume_doc_save = $resume_doc->move('uploads\\' . $user_id, $resume_doc->getClientOriginalName());
+            $resume_doc_path = $resume_doc_save->getPathname();
+        } else {
+            $resume_doc_path = DB::table('resume')->where('user_id', $user_id)->pluck('resume_doc');
         }
-        if ($additional_doc->isFile()) {
+
+        if ($request->hasFile('additional_doc')) {
+            $additional_doc = $request->file('additional_doc');
             $additional_doc_save = $additional_doc->move('uploads\\' . $user_id, $additional_doc->getClientOriginalName());
+            $additional_doc_path = $additional_doc_save->getPathname();
+        } else {
+            $additional_doc_path = DB::table('resume')->where('user_id', $user_id)->pluck('additional_doc');
         }
+
 
         //User Message
         $message;
@@ -156,9 +184,9 @@ class EditController extends Controller {
                         'phone' => $phone,
                         'mobile' => $mobile,
                         'skype' => $skype,
-                        'resume_photo' => $resume_photo->getPathname(),
-                        'resume_doc' => $resume_doc,
-                        'additional_doc' => $additional_doc,
+                        'resume_photo' => $resume_photo_path,
+                        'resume_doc' => $resume_doc_path,
+                        'additional_doc' => $additional_doc_path,
                         'overall_average' => $overall_average,
                         'transcripts' => $transcripts,
                         'degree' => $degree,
@@ -185,9 +213,9 @@ class EditController extends Controller {
                 'phone' => $phone,
                 'mobile' => $mobile,
                 'skype' => $skype,
-                'resume_photo' => $resume_photo_save->getPathname(),
-                'resume_doc' => $resume_doc_save->getPathname(),
-                'additional_doc' => $additional_doc_save->getPathname(),
+                'resume_photo' => $resume_photo_path,
+                'resume_doc' => $resume_doc_path,
+                'additional_doc' => $additional_doc_path,
                 'overall_average' => $overall_average,
                 'transcripts' => $transcripts,
                 'degree' => $degree,
@@ -202,6 +230,7 @@ class EditController extends Controller {
             return $message;
         }
     }
+
     /**
      * Invite a Jobseeker to a Job
      *
@@ -209,42 +238,40 @@ class EditController extends Controller {
      * @return Response
      */
     public function inviteToJob(Request $request) {
-        
+
         $job_id = $request->input('job_id');
         $resume_id = $request->input('resume_id');
         //Message
         $message = "User Invited";
-        
+
         DB::table('job_map')->insert([
             'job_id' => $job_id,
             'resume_id' => $resume_id
         ]);
-        
+
         return $message;
-        
     }
-     /**
+
+    /**
      * Unlink User from Job
      *
      * @param  request  $request
      * @return Response
      */
-    public function unlinkFromJob(Request $request,$resume_id,$job_id) {
-        
+    public function unlinkFromJob(Request $request, $resume_id, $job_id) {
+
         //$job_id = $request->input('job_id');
         //$resume_id = $request->input('resume_id');
-        
-        DB::table('job_map')->where('resume_id',$resume_id)
-                            ->where('job_id',$job_id)
-                            ->delete();
-        
+
+        DB::table('job_map')->where('resume_id', $resume_id)
+                ->where('job_id', $job_id)
+                ->delete();
+
         $message = "Unlinked User from Job";
-        
+
         return $message;
-        
     }
-    
-    
+
     /**
      * Get the Resume
      *
@@ -285,7 +312,7 @@ class EditController extends Controller {
             return view('templates/forms/editJobForm', ['job' => $job]);
         }
     }
-    
+
     /**
      * Get the Invite to Job Form
      * @param Request $request
@@ -293,14 +320,15 @@ class EditController extends Controller {
      * @return templates/forms/editJobForm.blade.php
      * 
      */
-    public function getInviteToJob(Request $request,$id) {
-        
-         $user_id = $request->user()->id;
-        
-         $job = DB::table('job')->where('user_id', $user_id)->get();
-        
-        return view('templates/forms/inviteJobForm',['resume_id' => $id,'job' => $job]);
+    public function getInviteToJob(Request $request, $id) {
+
+        $user_id = $request->user()->id;
+
+        $job = DB::table('job')->where('user_id', $user_id)->get();
+
+        return view('templates/forms/inviteJobForm', ['resume_id' => $id, 'job' => $job]);
     }
-    
-    
-}//End Controller
+
+}
+
+//End Controller
