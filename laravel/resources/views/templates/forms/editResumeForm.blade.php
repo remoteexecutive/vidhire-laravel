@@ -156,7 +156,7 @@
                         <h2>Resume Photo and Uploads</h2>
                         <p class="optional">
                             <label for="your-photo">Resume Photo</label> 
-                        <input type="file" class="text" name="resume_photo" id="your-photo" value="{{$resumes->resume_photo}}"></p>
+                            <input type="file" class="text" name="resume_photo" id="your-photo" value="{{$resumes->resume_photo}}"></p>
                         <p class="optional">
                             <label for="your-resume">Resume(.doc or .docx)</label> 
                             <input type="file" class="text" name="resume_doc" id="your-resume" value="{{$resumes->resume_doc}}">
@@ -227,13 +227,13 @@
 
                     </script>
 
-                    
+
 
 
                     <h2>Skills and Education</h2>
 
                     <legend>Overall Average, Last Year of Studies</legend>
-                    
+
                     @if($resumes->overall_average == 'below 70%') 
                     <input checked="checked" type="radio" name="overall_average" value="below 70%">
                     @else
@@ -254,7 +254,7 @@
                     <input type="radio" name="overall_average" value="80% - 90%">
                     @endif
                     <label class="overall_average">80% - 90%</label>
-                    
+
                     @if($resumes->overall_average == '90% - 95%')
                     <input checked="checked" type="radio" name="overall_average" value="90% - 95%">
                     @else
@@ -271,20 +271,20 @@
                     <label class="overall_average">95% - 100%</label>
 
                     <br>
-                    
+
                     <label>&nbsp;&nbsp;I have transcripts</label>
                     @if($resumes->transcripts == 'Yes')
                     <input checked="checked" type="checkbox" name="transcripts" value="Yes">
                     @else
                     <input type="checkbox" name="transcripts" value="Yes">
                     @endif
-                    
+
                     <br>
-                    
+
                     <p class="optional">
-                    <label for="degree">Degree</label> 
-                    <input type="text" class="text" name="degree" id="degree" value="{{ $resumes->degree }}"></p>
-                    
+                        <label for="degree">Degree</label> 
+                        <input type="text" class="text" name="degree" id="degree" value="{{ $resumes->degree }}"></p>
+
                     <p class="optional">
                         <label for="institution">Institution</label> 
                         <input type="text" class="text" name="institution" id="institution" value="{{ $resumes->institution }}">
@@ -305,54 +305,63 @@
 
                     <h2>Career Map</h2>
 
-                    <!--Reference 1-->   
-
-
-
+                    
+                    <!--References-->   
+                    
+                    @foreach($career_map as $map)
                     <fieldset>
+                        @if($count == 1)
                         <h3>Most Recent</h3>
-                        <input type="hidden" name="career_map_employment_1" value="Most Recent" />
+                        <input type="hidden" name="career_map_employment_{{$count}}" value="Most Recent" />
+                        @elseif($count == 2)
+                        <h3>2nd Most Recent</h3>
+                        <input type="hidden" name="career_map_employment_{{$count}}" value="2nd Most Recent" />
+                        @elseif ($count == 3)
+                        <h3>3rd Most Recent</h3>
+                        <input type="hidden" name="career_map_employment_{{$count}}" value="3rd Most Recent" />
+                        @endif
 
+                        
                         <p class="optional">
-                            <label for="career_map_position_1">Position</label> 
-                            <input type="text" class="text" name="career_map_position_1" value=""  placeholder="Position">
+                            <label for="career_map_position_{{$count}}">Position</label> 
+                            <input type="text" class="text" name="career_map_position_{{$count}}" value="{{$map->position}}"  placeholder="Position">
                         </p>
 
                         <p class="optional">
-                            <label for="career_map_start_date_1">Start Date</label>
-                            <input class="text" type="date" name="career_map_start_date_1" value="" placeholder="Start Date">   
+                            <label for="career_map_start_date_{{$count}}">Start Date</label>
+                            <input class="text" type="date" name="career_map_start_date_{{$count}}" value="{{$map->start_date}}" placeholder="Start Date">   
                         </p>
 
                         <p class="optional">
-                            <label for="career_map_end_date_1">End Date</label>
-                            <input class="text" type="date" name="career_map_end_date_1" value="" placeholder="End Date">   
+                            <label for="career_map_end_date_{{$count}}">End Date</label>
+                            <input class="text" type="date" name="career_map_end_date_{{$count}}" value="{{$map->end_date}}" placeholder="End Date">   
                         </p>
 
 
                         <p class="optional">
-                            <label for="career_map_job_type_1">Job Type</label>
-                            <select class="career_map_job_type_1" name="career_map_job_type_1"> 
+                            <label for="career_map_job_type_{{$count}}">Job Type</label>
+                            <select class="career_map_job_type_1" name="career_map_job_type_{{$count}}"> 
                                 <option>Full-Time</option>
                                 <option>Part-Time</option>
                             </select>
                         </p>
 
-                        <p class="optional"><label for="career_map_company_1">Company</label> 
-                            <input type="text" class="text" name="career_map_company_1" value="" placeholder="Company">
+                        <p class="optional"><label for="career_map_company_{{$count}}">Company</label> 
+                            <input type="text" class="text" name="career_map_company_{{$count}}" value="{{$map->company}}" placeholder="Company">
                         </p>
 
-                        <p class="optional"><label for="career_map_city_1">City</label> 
-                            <input type="text" class="text" name="career_map_city_1" value="" placeholder="City">
-                        </p>
-
-                        <p class="optional">
-                            <label for="career_map_country_1">Country</label> 
-                            <input type="text" class="text" name="career_map_country_1" value="" placeholder="Country">
+                        <p class="optional"><label for="career_map_city_{{$count}}">City</label> 
+                            <input type="text" class="text" name="career_map_city_{{$count}}" value="{{$map->city}}" placeholder="City">
                         </p>
 
                         <p class="optional">
-                            <label for="career_map_reason_for_leaving_1">Reason for Leaving</label>
-                            <select class="career_map_reason_for_leaving_1" name="career_map_reason_for_leaving_1"> 
+                            <label for="career_map_country_{{$count}}">Country</label> 
+                            <input type="text" class="text" name="career_map_country_{{$count}}" value="{{$map->country}}" placeholder="Country">
+                        </p>
+
+                        <p class="optional">
+                            <label for="career_map_reason_for_leaving_{{$count}}">Reason for Leaving</label>
+                            <select class="career_map_reason_for_leaving_{{$count}}" name="career_map_reason_for_leaving_{{$count}}"> 
                                 <option selected="selected">Career change</option>
                                 <option>Career growth</option>
                                 <option>Change in career path</option>
@@ -417,345 +426,50 @@
                             </select>
                         </p>
                         <p class="optional">
-                            <label for="career_map_salary_type_1">Salary Type</label>
-                            <select class="career_map_salary_type_1" name="career_map_salary_type_1"> 
+                            <label for="career_map_salary_type_{{$count}}">Salary Type</label>
+                            <select class="career_map_salary_type_{{$count}}" name="career_map_salary_type_{{$count}}"> 
                                 <option>Per Hour</option>
                                 <option>Per Month</option>
                             </select>
                         </p>
 
                         <p class="optional">
-                            <label for="career_map_starting_salary_1">Starting Salary</label> 
-                            <input type="text" class="text" name="career_map_starting_salary_1" value="" placeholder="Starting Salary">
+                            <label for="career_map_starting_salary_{{$count}}">Starting Salary</label> 
+                            <input type="text" class="text" name="career_map_starting_salary_{{$count}}" value="{{$map->starting_salary}}" placeholder="Starting Salary">
                         </p>
 
                         <p class="optional">
-                            <label for="career_map_final_salary_1">Final Salary</label> 
-                            <input type="text" class="text" name="career_map_final_salary_1" value="" placeholder="Final Salary">
+                            <label for="career_map_final_salary_{{$count}}">Final Salary</label> 
+                            <input type="text" class="text" name="career_map_final_salary_{{$count}}" value="{{$map->final_salary}}" placeholder="Final Salary">
                         </p>
 
                         <p class="optional">
-                            <label for="career_map_reference_name_1">Reference Name</label> 
-                            <input type="text" class="text" name="career_map_reference_name_1" value="" placeholder="Reference Name">
+                            <label for="career_map_reference_name_{{$count}}">Reference Name</label> 
+                            <input type="text" class="text" name="career_map_reference_name_{{$count}}" value="{{$map->reference_name}}" placeholder="Reference Name">
                         </p>
 
                         <p class="optional">
-                            <label for="career_map_reference_email_1">Reference Email</label> 
-                            <input type="text" class="text" name="career_map_reference_email_1" value="" placeholder="Reference Email">
+                            <label for="career_map_reference_email_{{$count}}">Reference Email</label> 
+                            <input type="text" class="text" name="career_map_reference_email_{{$count}}" value="{{$map->reference_email}}" placeholder="Reference Email">
                         </p>
 
                         <p class="optional">
-                            <label for="career_map_reference_phone_number_1">Reference Phone Number</label> 
-                            <input type="text" class="text" name="career_map_reference_phone_number_1" value="" placeholder="Reference Phone Number">
+                            <label for="career_map_reference_phone_number_{{$count}}">Reference Phone Number</label> 
+                            <input type="text" class="text" name="career_map_reference_phone_number_{{$count}}" value="{{$map->reference_phone_number}}" placeholder="Reference Phone Number">
                         </p>
 
                         <p class="optional">
-                            <label for="career_map_reference_position_1">Reference Position</label> 
-                            <input type="text" class="text" name="career_map_reference_position_1" value="" placeholder="Reference Position">
+                            <label for="career_map_reference_position_{{$count}}">Reference Position</label> 
+                            <input type="text" class="text" name="career_map_reference_position_{{$count}}" value="{{$map->reference_position}}" placeholder="Reference Position">
                         </p>
 
                         <p class="optional"> 
-                            <textarea style="width: 320px;" class="career_map_reference_notes_1" name="career_map_reference_notes_1" placeholder="Reference Additional Info"></textarea>
+                            <textarea style="width: 320px;" class="career_map_reference_notes_{{$count}}" name="career_map_reference_notes_{{$count}}" placeholder="Reference Additional Info">{{ e($map->position) }}</textarea>
                         </p>
+                        
                     </fieldset>
-                    <fieldset>
-                        <h3>2nd Last</h3>
-                        <input type="hidden" name="career_map_employment_1" value="2nd Last" />
-                        <p class="optional">
-                            <label for="career_map_position_2">Position</label> 
-                            <input type="text" class="text" name="career_map_position_2" value=""  placeholder="Position">
-                        </p>
-
-                        <p class="optional">
-                            <label for="career_map_start_date_2">Start Date</label>
-                            <input class="text" type="date" name="career_map_start_date_2" value="" placeholder="Start Date">   
-                        </p>
-
-                        <p class="optional">
-                            <label for="career_map_end_date_2">End Date</label>
-                            <input class="text" type="date" name="career_map_end_date_2" value="" placeholder="End Date">   
-                        </p>
-
-
-                        <p class="optional">
-                            <label for="career_map_job_type_2">Job Type</label>
-                            <select class="career_map_job_type_2" name="career_map_job_type_2"> 
-                                <option>Full-Time</option>
-                                <option>Part-Time</option>
-                            </select>
-                        </p>
-
-                        <p class="optional"><label for="career_map_company_2">Company</label> 
-                            <input type="text" class="text" name="career_map_company_2" value="" placeholder="Company">
-                        </p>
-
-                        <p class="optional"><label for="career_map_city_2">City</label> 
-                            <input type="text" class="text" name="career_map_city_2" value="" placeholder="City">
-                        </p>
-
-                        <p class="optional">
-                            <label for="career_map_country_2">Country</label> 
-                            <input type="text" class="text" name="career_map_country_2" value="" placeholder="Country">
-                        </p>
-
-                        <p class="optional">
-                            <label for="career_map_reason_for_leaving_2">Reason for Leaving</label>
-                            <select class="career_map_reason_for_leaving_2" name="career_map_reason_for_leaving_2"> 
-                                <option selected="selected">Career change</option>
-                                <option>Career growth</option>
-                                <option>Change in career path</option>
-                                <option>Company cut backs</option>
-                                <option>Company downsized</option>
-                                <option>Company went out of business</option>
-                                <option>Family circumstances</option>
-                                <option>Family reasons</option>
-                                <option>Flexible schedule</option>
-                                <option>Getting married</option>
-                                <option>Hours reduced</option>
-                                <option>Job was outsourced</option>
-                                <option>Good career opportunity</option>
-                                <option>Good reputation and opportunity at the new company</option>
-                                <option>Laid off</option>
-                                <option>Landed a higher paying job</option>
-                                <option>Limited growth at company</option>
-                                <option>Long commute</option>
-                                <option>Looking for a new challenge</option>
-                                <option>Needed a full-time position</option>
-                                <option>New challenge</option>
-                                <option>Not compatible with company goals</option>
-                                <option>Not enough hours</option>
-                                <option>Not enough work or challenge</option>
-                                <option>Offered a permanent position</option>
-                                <option>Personal reasons</option>
-                                <option>Position eliminated</option>
-                                <option>Position ended</option>
-                                <option>Relocating</option>
-                                <option>Reorganization or merger</option>
-                                <option>Retiring</option>
-                                <option>Seasonal position</option>
-                                <option>Seeking a challenge</option>
-                                <option>Seeking more responsibility</option>
-                                <option>Staying home to raise a family</option>
-                                <option>Summer job</option>
-                                <option>Temporary job</option>
-                                <option>Travel</option>
-                                <option>Went back to school</option>
-                                <option>About to get fired</option>
-                                <option>Arrested</option>
-                                <option>Bad company to work for</option>
-                                <option>Bored at work</option>
-                                <option>Childcare issues</option>
-                                <option>Didn't get along with co-workers</option>
-                                <option>Didn't like the schedule</option>
-                                <option>Didn't want to work as many hours</option>
-                                <option>Didn't want to work evening or weekends</option>
-                                <option>Hated my boss</option>
-                                <option>Hated my job</option>
-                                <option>Injured</option>
-                                <option>Job was too difficult</option>
-                                <option>Let go for harassment</option>
-                                <option>Let go for tardiness</option>
-                                <option>Manager was stupid</option>
-                                <option>My boss was a jerk</option>
-                                <option>My mom made me quit</option>
-                                <option>No transportation</option>
-                                <option>Overtime was required</option>
-                                <option>Passed over for promotion</option>
-                                <option>Rocky marriage</option>
-                            </select>
-                        </p>
-                        <p class="optional">
-                            <label for="career_map_salary_type_2">Salary Type</label>
-                            <select class="career_map_salary_type_2" name="career_map_salary_type_2"> 
-                                <option>Per Hour</option>
-                                <option>Per Month</option>
-                            </select>
-                        </p>
-
-                        <p class="optional">
-                            <label for="career_map_starting_salary_2">Starting Salary</label> 
-                            <input type="text" class="text" name="career_map_starting_salary_2" value="" placeholder="Starting Salary">
-                        </p>
-
-                        <p class="optional">
-                            <label for="career_map_final_salary_2">Final Salary</label> 
-                            <input type="text" class="text" name="career_map_final_salary_2" value="" placeholder="Final Salary">
-                        </p>
-
-                        <p class="optional">
-                            <label for="career_map_reference_name_2">Reference Name</label> 
-                            <input type="text" class="text" name="career_map_reference_name_2" value="" placeholder="Reference Name">
-                        </p>
-
-                        <p class="optional">
-                            <label for="career_map_reference_email_2">Reference Email</label> 
-                            <input type="text" class="text" name="career_map_reference_email_2" value="" placeholder="Reference Email">
-                        </p>
-
-                        <p class="optional">
-                            <label for="career_map_reference_phone_number_2">Reference Phone Number</label> 
-                            <input type="text" class="text" name="career_map_reference_phone_number_2" value="" placeholder="Reference Phone Number">
-                        </p>
-
-                        <p class="optional">
-                            <label for="career_map_reference_position_2">Reference Position</label> 
-                            <input type="text" class="text" name="career_map_reference_position_2" value="" placeholder="Reference Position">
-                        </p>
-
-                        <p class="optional"> 
-                            <textarea style="width: 320px;" class="career_map_reference_notes_2" name="career_map_reference_notes_2" placeholder="Reference Additional Info"></textarea>
-                        </p>
-
-                    </fieldset>
-                    <fieldset>
-                        <h3>3rd Last</h3>
-                        <input type="hidden" name="career_map_employment_1" value="3rd Last" />
-                        <p class="optional">
-                            <label for="career_map_position_3">Position</label> 
-                            <input type="text" class="text" name="career_map_position_3" value=""  placeholder="Position">
-                        </p>
-
-                        <p class="optional">
-                            <label for="career_map_start_date_3">Start Date</label>
-                            <input class="text" type="date" name="career_map_start_date_3" value="" placeholder="Start Date">   
-                        </p>
-
-                        <p class="optional">
-                            <label for="career_map_end_date_3">End Date</label>
-                            <input class="text" type="date" name="career_map_end_date_3" value="" placeholder="End Date">   
-                        </p>
-
-
-                        <p class="optional">
-                            <label for="career_map_job_type_3">Job Type</label>
-                            <select class="career_map_job_type_3" name="career_map_job_type_3"> 
-                                <option>Full-Time</option>
-                                <option>Part-Time</option>
-                            </select>
-                        </p>
-
-                        <p class="optional"><label for="career_map_company_3">Company</label> 
-                            <input type="text" class="text" name="career_map_company_3" value="" placeholder="Company">
-                        </p>
-
-                        <p class="optional"><label for="career_map_city_3">City</label> 
-                            <input type="text" class="text" name="career_map_city_3" value="" placeholder="City">
-                        </p>
-
-                        <p class="optional">
-                            <label for="career_map_country_3">Country</label> 
-                            <input type="text" class="text" name="career_map_country_3" value="" placeholder="Country">
-                        </p>
-
-                        <p class="optional">
-                            <label for="career_map_reason_for_leaving_3">Reason for Leaving</label>
-                            <select class="company_3_reason_for_leaving_3" name="career_map_reason_for_leaving_3"> 
-                                <option selected="selected">Career change</option>
-                                <option>Career growth</option>
-                                <option>Change in career path</option>
-                                <option>Company cut backs</option>
-                                <option>Company downsized</option>
-                                <option>Company went out of business</option>
-                                <option>Family circumstances</option>
-                                <option>Family reasons</option>
-                                <option>Flexible schedule</option>
-                                <option>Getting married</option>
-                                <option>Hours reduced</option>
-                                <option>Job was outsourced</option>
-                                <option>Good career opportunity</option>
-                                <option>Good reputation and opportunity at the new company</option>
-                                <option>Laid off</option>
-                                <option>Landed a higher paying job</option>
-                                <option>Limited growth at company</option>
-                                <option>Long commute</option>
-                                <option>Looking for a new challenge</option>
-                                <option>Needed a full-time position</option>
-                                <option>New challenge</option>
-                                <option>Not compatible with company goals</option>
-                                <option>Not enough hours</option>
-                                <option>Not enough work or challenge</option>
-                                <option>Offered a permanent position</option>
-                                <option>Personal reasons</option>
-                                <option>Position eliminated</option>
-                                <option>Position ended</option>
-                                <option>Relocating</option>
-                                <option>Reorganization or merger</option>
-                                <option>Retiring</option>
-                                <option>Seasonal position</option>
-                                <option>Seeking a challenge</option>
-                                <option>Seeking more responsibility</option>
-                                <option>Staying home to raise a family</option>
-                                <option>Summer job</option>
-                                <option>Temporary job</option>
-                                <option>Travel</option>
-                                <option>Went back to school</option>
-                                <option>About to get fired</option>
-                                <option>Arrested</option>
-                                <option>Bad company to work for</option>
-                                <option>Bored at work</option>
-                                <option>Childcare issues</option>
-                                <option>Didn't get along with co-workers</option>
-                                <option>Didn't like the schedule</option>
-                                <option>Didn't want to work as many hours</option>
-                                <option>Didn't want to work evening or weekends</option>
-                                <option>Hated my boss</option>
-                                <option>Hated my job</option>
-                                <option>Injured</option>
-                                <option>Job was too difficult</option>
-                                <option>Let go for harassment</option>
-                                <option>Let go for tardiness</option>
-                                <option>Manager was stupid</option>
-                                <option>My boss was a jerk</option>
-                                <option>My mom made me quit</option>
-                                <option>No transportation</option>
-                                <option>Overtime was required</option>
-                                <option>Passed over for promotion</option>
-                                <option>Rocky marriage</option>
-                            </select>
-                        </p>
-                        <p class="optional">
-                            <label for="career_map_salary_type_3">Salary Type</label>
-                            <select class="career_map_salary_type_3" name="career_map_salary_type_3"> 
-                                <option>Per Hour</option>
-                                <option>Per Month</option>
-                            </select>
-                        </p>
-
-                        <p class="optional">
-                            <label for="career_map_starting_salary_3">Starting Salary</label> 
-                            <input type="text" class="text" name="career_map_starting_salary_3" value="" placeholder="Starting Salary">
-                        </p>
-
-                        <p class="optional">
-                            <label for="career_map_final_salary_3">Final Salary</label> 
-                            <input type="text" class="text" name="career_map_final_salary_3" value="" placeholder="Final Salary">
-                        </p>
-
-                        <p class="optional">
-                            <label for="career_map_reference_name_3">Reference Name</label> 
-                            <input type="text" class="text" name="career_map_reference_name_3" value="" placeholder="Reference Name">
-                        </p>
-
-                        <p class="optional">
-                            <label for="career_map_reference_email_3">Reference Email</label> 
-                            <input type="text" class="text" name="career_map_reference_email_3" value="" placeholder="Reference Email">
-                        </p>
-
-                        <p class="optional">
-                            <label for="career_map_reference_phone_number_3">Reference Phone Number</label> 
-                            <input type="text" class="text" name="career_map_reference_phone_number_3" value="" placeholder="Reference Phone Number">
-                        </p>
-
-                        <p class="optional">
-                            <label for="career_map_reference_position_3">Reference Position</label> 
-                            <input type="text" class="text" name="career_map_reference_position_3" value="" placeholder="Reference Position">
-                        </p>
-
-                        <p class="optional"> 
-                            <textarea style="width: 320px;" class="career_map_reference_notes_3" name="career_map_reference_notes_3" placeholder="Reference Additional Info"></textarea>
-                        </p>
-
-                    </fieldset>
+                    {{--*/ $count++ /*--}}
+                    @endforeach
                     <br>
                     <br>
                     <fieldset>

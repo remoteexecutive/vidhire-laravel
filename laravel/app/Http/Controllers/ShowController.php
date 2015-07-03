@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use Storage;
 use App\User;
+use App\CareerMap;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Validation\Validator;
@@ -33,8 +34,11 @@ class ShowController extends Controller {
                                      ->select('users.first_name', 'users.last_name', 'resume.*')
                                      ->where('users.id', $user_id)
                                      ->first();
+            
+                                        
+            $career_map = DB::table('career_map')->where('user_id',$user_id)->get();                                        
 
-            return view('dashboard', ['name' => $users->first_name, 'user' => $users->user_type, 'resume' => $resume]);
+            return view('dashboard', ['name' => $users->first_name, 'user' => $users->user_type, 'resume' => $resume,'career_map' => $career_map]);
         }
 
         //For Employer
@@ -84,11 +88,12 @@ class ShowController extends Controller {
                                      ->select('users.first_name', 'users.last_name', 'resume.*')
                                      ->where('resume.id', $id)
                                      ->first();
-                                     
-                                     
-
+                                        
+       //Get the career map data with list item's resume_id          
+        $career_map = DB::table('career_map')->where('user_id',$id)->get();                                                                          
+        
         //Return resume using data above
-        return view('templates/show/resume', ['name' => $users->first_name, 'user' => $users->user_type,'resume' => $resume]);
+        return view('templates/show/resume', ['name' => $users->first_name, 'user' => $users->user_type,'resume' => $resume,'career_map' => $career_map]);
     }
     
     /**

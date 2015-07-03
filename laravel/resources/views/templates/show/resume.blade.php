@@ -60,7 +60,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="ead-document">
-
+                                    @if($resume->resume_doc != '')
+                                    <!--iframe src="{{$resume->resume_doc}}"></iframe-->
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -140,70 +142,29 @@
                                         <li class="list-group-item">Notes</li>
                                     </ul>
                                 </div>
-
+                                @foreach($career_map as $map)
                                 <div class="col-md-3">
                                     <ul class="list-group">
-                                        <li class="list-group-item">Most Recent Job</li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
+                                        <li class="list-group-item">{{$map->employment}}</li>
+                                        <li class="list-group-item">{{$map->position}}</li>
+                                        <li class="list-group-item">{{$map->start_date}}</li>
+                                        <li class="list-group-item">{{$map->end_date}}</li>
+                                        <li class="list-group-item">{{$map->job_type}}</li>
+                                        <li class="list-group-item">{{$map->company}}</li>
+                                        <li class="list-group-item">{{$map->city}}</li>
+                                        <li class="list-group-item">{{$map->country}}</li>
+                                        <li class="list-group-item">{{$map->reason_for_leaving}}</li>
+                                        <li class="list-group-item">{{$map->starting_salary}}&nbsp;{{$resume->currency}}</li>
+                                        <li class="list-group-item">{{$map->final_salary}}&nbsp;{{$resume->currency}}</li>
+                                        <li class="list-group-item">{{$map->salary_type}}</li>
+                                        <li class="list-group-item">{{$map->reference_name}}</li>
+                                        <li class="list-group-item">{{$map->reference_position}}</li>
+                                        <li class="list-group-item">{{$map->reference_email}}</li>
+                                        <li class="list-group-item">{{$map->reference_phone_number}}</li>
+                                        <li class="list-group-item">{{$map->notes}}</li>
                                     </ul>
                                 </div>
-                                <div class="col-md-3">
-                                    <ul class="list-group">
-                                        <li class="list-group-item">2nd Last</li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-3">
-                                    <ul class="list-group">
-                                        <li class="list-group-item">3rd Last</li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item"></li>
-                                    </ul>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>

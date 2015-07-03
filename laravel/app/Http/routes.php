@@ -38,6 +38,10 @@ Route::post('auth/register', 'UserController@register');
 /*Edit Forms*/
 //Job
 Route::get('/edit-job-form/{id?}','EditController@getJob');
+
+Route::get('/submit-job-form',function(){
+    return view('templates/forms/editJobForm');
+});
 //Resume
 Route::get('/edit-resume-form','EditController@getResume');
 //Invite
@@ -52,10 +56,14 @@ Route::get('/view-resume/{id}','ShowController@viewResume');
 //Job
 Route::get('/view-job/{id}','ShowController@viewJob');
 
+
+
 /*Edit Actions*/
 Route::post('/submit-job','EditController@submitJob');
 Route::post('/edit-job','EditController@editJob');
 Route::post('/edit-resume','EditController@editResume');
+
+
 
 /*Invite User to a Job*/
 Route::post('/invite-to-job','EditController@inviteToJob');
