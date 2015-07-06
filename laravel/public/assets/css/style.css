@@ -1281,7 +1281,7 @@ footer {
   list-style: none;
 }
 .accordion-notes div {
-  background-color: #2aee9f;
+  background-color: #99dc26;
 }
 .edit-job .edit-job-container {
   background-color: #fbfbfb;
@@ -1539,7 +1539,10 @@ footer {
   color: #fff;
   border-radius: 15px;
 }
-.single-resume .resume-container .contact-information li {
+.single-resume .resume-container .contact-information ul {
+  list-style: none;
+}
+.single-resume .resume-container .contact-information ul li {
   padding: 5px;
 }
 .single-resume .resume-container .contact-information .su-box-title {

@@ -39,6 +39,7 @@
                         </div>
                     </div>
                 </div>
+                @if($user == 'Employer')
                 <div class="col-md-4">
                     <div class="resume-statuses">
                         <div>
@@ -53,6 +54,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             </div> <!--First Row-->
             <div class="row">
                 <div class="col-md-12">
