@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use Storage;
 use App\User;
+use App\CareerMap;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Validation\Validator;
@@ -23,7 +24,7 @@ class EditController extends Controller {
         $company = $request->input('company');
         $website = $request->input('website');
         $location = $request->input('location');
-        
+
         $job_title = $request->input('job_title');
         $job_type = $request->input('job_type');
         $job_category = $request->input('job_category');
@@ -78,7 +79,7 @@ class EditController extends Controller {
 
         //For File Upload
         $logo_save = $logo->move('uploads\\' . $user_id, $logo->getClientOriginalName());
-        
+
         //For File Upload
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
@@ -136,6 +137,62 @@ class EditController extends Controller {
         $year_issued = $request->input('year_issued');
         $skills = $request->input('skills');
         $interview_video_link = $request->input('interview_video_link');
+
+        $employment_1 = $request->input('career_map_employment_1');
+        $company_1 = $request->input('career_map_company_1');
+        $position_1 = $request->input('career_map_position_1');
+        $start_date_1 = $request->input('career_map_start_date_1');
+        $end_date_1 = $request->input('career_map_end_date_1');
+        $job_type_1 = $request->input('career_map_job_type_1');
+        $city_1 = $request->input('career_map_city_1');
+        $country_1 = $request->input('career_map_country_1');
+        $reason_for_leaving_1 = $request->input('career_map_reason_for_leaving_1');
+        $salary_type_1 = $request->input('career_map_salary_type_1');
+        $starting_salary_1 = $request->input('career_map_starting_salary_1');
+        $final_salary_1 = $request->input('career_map_final_salary_1');
+        $reference_name_1 = $request->input('career_map_reference_name_1');
+        $reference_email_1 = $request->input('career_map_reference_email_1');
+        $reference_phone_number_1 = $request->input('career_map_reference_phone_number_1');
+        $reference_position_1 = $request->input('career_map_reference_position_1');
+        $notes_1 = $request->input('career_map_reference_notes_1');
+
+        $employment_2 = $request->input('career_map_employment_2');
+        $company_2 = $request->input('career_map_company_2');
+        $position_2 = $request->input('career_map_position_2');
+        $start_date_2 = $request->input('career_map_start_date_2');
+        $end_date_2 = $request->input('career_map_end_date_2');
+        $job_type_2 = $request->input('career_map_job_type_2');
+        $city_2 = $request->input('career_map_city_2');
+        $country_2 = $request->input('career_map_country_2');
+        $reason_for_leaving_2 = $request->input('career_map_reason_for_leaving_2');
+        $salary_type_2 = $request->input('career_map_salary_type_2');
+        $starting_salary_2 = $request->input('career_map_starting_salary_2');
+        $final_salary_2 = $request->input('career_map_final_salary_2');
+        $reference_name_2 = $request->input('career_map_reference_name_2');
+        $reference_email_2 = $request->input('career_map_reference_email_2');
+        $reference_phone_number_2 = $request->input('career_map_reference_phone_number_2');
+        $reference_position_2 = $request->input('career_map_reference_position_2');
+        $notes_2 = $request->input('career_map_reference_notes_2');
+
+        $employment_3 = $request->input('career_map_employment_3');
+        $company_3 = $request->input('career_map_company_3');
+        $position_3 = $request->input('career_map_position_3');
+        $start_date_3 = $request->input('career_map_start_date_3');
+        $end_date_3 = $request->input('career_map_end_date_3');
+        $job_type_3 = $request->input('career_map_job_type_3');
+        $city_3 = $request->input('career_map_city_3');
+        $country_3 = $request->input('career_map_country_3');
+        $reason_for_leaving_3 = $request->input('career_map_reason_for_leaving_3');
+        $salary_type_3 = $request->input('career_map_salary_type_3');
+        $starting_salary_3 = $request->input('career_map_starting_salary_3');
+        $final_salary_3 = $request->input('career_map_final_salary_3');
+        $reference_name_3 = $request->input('career_map_reference_name_3');
+        $reference_email_3 = $request->input('career_map_reference_email_3');
+        $reference_phone_number_3 = $request->input('career_map_reference_phone_number_3');
+        $reference_position_3 = $request->input('career_map_reference_position_3');
+        $notes_3 = $request->input('career_map_reference_notes_3');
+
+
 
         //For File Uploads
 
@@ -226,9 +283,80 @@ class EditController extends Controller {
             ]);
 
             $message = "Updated Resume";
-
-            return $message;
         }
+
+        //Insert Career Map Data
+
+        $this->editCareerMap($user_id, $employment_1, $company_1, $position_1, $start_date_1, $end_date_1, $job_type_1, $city_1, $country_1, $reason_for_leaving_1, $salary_type_1, $starting_salary_1, $final_salary_1, $reference_name_1, $reference_email_1, $reference_phone_number_1, $reference_position_1, $notes_1);
+
+        $this->editCareerMap($user_id, $employment_2, $company_2, $position_2, $start_date_2, $end_date_2, $job_type_2, $city_2, $country_2, $reason_for_leaving_2, $salary_type_2, $starting_salary_2, $final_salary_2, $reference_name_2, $reference_email_2, $reference_phone_number_2, $reference_position_2, $notes_2);
+
+        $this->editCareerMap($user_id, $employment_3, $company_3, $position_3, $start_date_3, $end_date_3, $job_type_3, $city_3, $country_3, $reason_for_leaving_3, $salary_type_3, $starting_salary_3, $final_salary_3, $reference_name_3, $reference_email_3, $reference_phone_number_3, $reference_position_3, $notes_3);
+
+        return $message;
+    }
+
+    /**
+     * For Submitting and Editing the Career Map
+     *
+     * @param  request  $request
+     * @return Response
+     */
+    public function editCareerMap($user_id, $employment, $company, $position, $start_date, $end_date, $job_type, $city, $country, $reason_for_leaving, $salary_type, $starting_salary, $final_salary, $reference_name, $reference_email, $reference_phone_number, $reference_position, $notes) {
+
+        $career_map = DB::table('career_map')->select(DB::raw('count(*) as user_count'))
+                ->where('user_id', $user_id)
+                ->where('employment', $employment)
+                ->first();
+
+
+        if ($career_map->user_count == 0) {
+
+            CareerMap::create([
+                'user_id' => $user_id,
+                'employment' => $employment,
+                'company' => $company,
+                'position' => $position,
+                'start_date' => $start_date,
+                'end_date' => $end_date,
+                'job_type' => $job_type,
+                'city' => $city,
+                'country' => $country,
+                'reason_for_leaving' => $reason_for_leaving,
+                'salary_type' => $salary_type,
+                'starting_salary' => $starting_salary,
+                'final_salary' => $final_salary,
+                'reference_name' => $reference_name,
+                'reference_email' => $reference_email,
+                'reference_phone_number' => $reference_phone_number,
+                'reference_position' => $reference_position,
+                'notes' => $notes
+            ]);
+        } else {
+
+            CareerMap::where('user_id', $user_id)
+                    ->where('employment', $employment)
+                    ->update([
+                        'company' => $company,
+                        'position' => $position,
+                        'start_date' => $start_date,
+                        'end_date' => $end_date,
+                        'job_type' => $job_type,
+                        'city' => $city,
+                        'country' => $country,
+                        'reason_for_leaving' => $reason_for_leaving,
+                        'salary_type' => $salary_type,
+                        'starting_salary' => $starting_salary,
+                        'final_salary' => $final_salary,
+                        'reference_name' => $reference_name,
+                        'reference_email' => $reference_email,
+                        'reference_phone_number' => $reference_phone_number,
+                        'reference_position' => $reference_position,
+                        'notes' => $notes
+            ]);
+        } //end if
+
+        return true;
     }
 
     /**
@@ -284,7 +412,9 @@ class EditController extends Controller {
 
         $resume = DB::table('resume')->where('user_id', $user_id)->get();
 
-        return view('templates/forms/editResumeForm', ['resume' => $resume]);
+        $career_map = DB::table('career_map')->where('user_id',$user_id)->get();
+        
+        return view('templates/forms/editResumeForm', ['resume' => $resume,'career_map' => $career_map,'count' => 1 ]);
     }
 
     /**

@@ -308,7 +308,7 @@ $(".job-edit-link").click(function () {
  **/
 $(".submit-job").click(function () {
 
-    var edit_job_form = '/edit-job-form/0';
+    var edit_job_form = '/edit-job-form';
     BootstrapDialog.show({
         title: 'Submit Job',
         size: 'size-wide',
@@ -396,7 +396,7 @@ $(".edit-resume").click(function () {
                     formData.append('action', 'edit-resume');
                     formData.append('resume_photo', $('input[name=resume_photo]')[0].files[0]);
                     formData.append('resume_doc', $('input[name=resume_doc]')[0].files[0]);
-                    formData.append('additional_doc', $('input[name=additional_doc]')[0].files[0])
+                    formData.append('additional_doc', $('input[name=additional_doc]')[0].files[0]);
 
                     $.ajax({
                         url: ajaxurl,
@@ -554,9 +554,10 @@ $(".apply-for-job").click(function () {
  **/
 $(".resume-view-link").click(function () {
 
-    var get_list_index = $(this).parent().parent().parent().index() - 1;
-    var resume_id = $('.resume:eq(' + get_list_index + ') input[name=resume_id]').val();
+    var get_list_index = $(this).parent().parent().parent().parent().index();
+    var resume_id = $('ol.resumes li.resume:eq(' + get_list_index + ') input[name=resume_id]').val();
     var view_resume_form = "/view-resume/" + resume_id;
+    
     BootstrapDialog.show({
         title: 'View Resume',
         size: 'size-wide',
