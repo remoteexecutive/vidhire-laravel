@@ -51,4 +51,8 @@ class Resume extends Model {
     public function jobMap(){
         return $this->hasOne('JobMap','resume_id', 'id');
     }
+
+    public function resumeStatus(){
+        return $this->hasOne('ResumeStatus', 'resume_id', 'id');
+    }
 }

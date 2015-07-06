@@ -36,4 +36,8 @@ class ResumeStatus extends Model {
      * @var array
      */
     //protected $hidden = ['password', 'remember_token'];
+
+    public function resume(){
+        return $this->belongsTo('Resume', 'id', 'resume_id');
+    }
 }

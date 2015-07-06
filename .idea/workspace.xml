@@ -6,6 +6,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Job.php" afterPath="$PROJECT_DIR$/laravel/app/Job.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/JobMap.php" afterPath="$PROJECT_DIR$/laravel/app/JobMap.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Resume.php" afterPath="$PROJECT_DIR$/laravel/app/Resume.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/ResumeStatus.php" afterPath="$PROJECT_DIR$/laravel/app/ResumeStatus.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/User.php" afterPath="$PROJECT_DIR$/laravel/app/User.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/config/local/app.php" afterPath="$PROJECT_DIR$/laravel/config/local/app.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/config/production/app.php" afterPath="$PROJECT_DIR$/laravel/config/production/app.php" />
@@ -20,6 +21,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/config/production/mail.php" afterPath="$PROJECT_DIR$/laravel/config/production/mail.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/config/stagging/mail.php" afterPath="$PROJECT_DIR$/laravel/config/stagging/mail.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/config/testing/mail.php" afterPath="$PROJECT_DIR$/laravel/config/testing/mail.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
@@ -101,8 +103,8 @@
       <file leaf-file-name="ResumeStatus.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/laravel/app/ResumeStatus.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="765">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="-26.153847" vertical-offset="0" max-vertical-offset="833">
+              <caret line="40" column="61" selection-start-line="40" selection-start-column="61" selection-end-line="40" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -111,18 +113,28 @@
       <file leaf-file-name="Resume.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/laravel/app/Resume.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.0" vertical-offset="295" max-vertical-offset="1020">
-              <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
+            <state vertical-scroll-proportion="-24.615385" vertical-offset="295" max-vertical-offset="1088">
+              <caret line="55" column="64" selection-start-line="55" selection-start-column="64" selection-end-line="55" selection-end-column="64" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ReferenceResponse.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/laravel/app/ReferenceResponse.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="799">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/laravel/app/User.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.35533708" vertical-offset="121" max-vertical-offset="833">
-              <caret line="26" column="48" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="48" />
+            <state vertical-scroll-proportion="-22.153847" vertical-offset="121" max-vertical-offset="833">
+              <caret line="45" column="5" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -158,9 +170,10 @@
       <list>
         <option value="$PROJECT_DIR$/laravel/config/local/database.php" />
         <option value="$PROJECT_DIR$/laravel/app/JobMap.php" />
-        <option value="$PROJECT_DIR$/laravel/app/Resume.php" />
         <option value="$PROJECT_DIR$/laravel/app/Job.php" />
         <option value="$PROJECT_DIR$/laravel/app/User.php" />
+        <option value="$PROJECT_DIR$/laravel/app/ResumeStatus.php" />
+        <option value="$PROJECT_DIR$/laravel/app/Resume.php" />
       </list>
     </option>
   </component>
@@ -653,14 +666,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/app/Resume.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.0" vertical-offset="295" max-vertical-offset="1020">
-          <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/laravel/app/JobMap.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.423077" vertical-offset="51" max-vertical-offset="782">
@@ -677,14 +682,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/app/ResumeStatus.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="765">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/laravel/app/CareerMap.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.576923" vertical-offset="193" max-vertical-offset="918">
@@ -695,8 +692,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/laravel/app/User.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35533708" vertical-offset="121" max-vertical-offset="833">
-          <caret line="26" column="48" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="48" />
+        <state vertical-scroll-proportion="-22.153847" vertical-offset="121" max-vertical-offset="833">
+          <caret line="45" column="5" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/app/ResumeStatus.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-26.153847" vertical-offset="0" max-vertical-offset="833">
+          <caret line="40" column="61" selection-start-line="40" selection-start-column="61" selection-end-line="40" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/app/Resume.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-24.615385" vertical-offset="295" max-vertical-offset="1088">
+          <caret line="55" column="64" selection-start-line="55" selection-start-column="64" selection-end-line="55" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/app/ReferenceResponse.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="799">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
