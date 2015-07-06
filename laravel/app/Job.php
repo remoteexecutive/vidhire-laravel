@@ -37,4 +37,8 @@ class Job extends Model {
      * @var array
      */
     //protected $hidden = ['password', 'remember_token'];
+
+    public function user(){
+        return $this->belongsTo('User', 'id', 'user_id');
+    }
 }

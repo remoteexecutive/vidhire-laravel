@@ -29,4 +29,12 @@ class JobMap extends Model {
      * @var array
      */
     //protected $hidden = ['password', 'remember_token'];
+
+    public function job(){
+        return $this->belongsTo('Job','id', 'job_id');
+    }
+
+    public function resume(){
+        return $this->belongsTo('Resume', 'id', 'resume_id');
+    }
 }
