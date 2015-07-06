@@ -1,0 +1,46 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Resume extends Model {
+
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'resume';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'user_id',
+        'rate',
+        'currency',
+        'location',
+        'latlng',
+        'email',
+        'phone',
+        'mobile',
+        'skype',
+        'overall_average',
+        'transcripts',
+        'degree',
+        'institution',
+        'year_issued',
+        'skills',
+        'interview_video_link'
+    ];
+
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    //protected $hidden = ['password', 'remember_token'];
+}

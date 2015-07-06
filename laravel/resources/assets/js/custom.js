@@ -451,7 +451,7 @@ $(".unlink-job-from-user").click(function () {
     var job_id = $("input[name=resume_job_id]").val();
     var token = $("input[name=_token]").val();
     var ajaxurl = '/unlink-from-job/' + resume_id + '/' + job_id;
-    
+
     BootstrapDialog.confirm('Are you sure you want to unlink the applicant from the job?', function (result) {
         if (result) {
 
@@ -557,7 +557,7 @@ $(".resume-view-link").click(function () {
     var get_list_index = $(this).parent().parent().parent().parent().index();
     var resume_id = $('ol.resumes li.resume:eq(' + get_list_index + ') input[name=resume_id]').val();
     var view_resume_form = "/view-resume/" + resume_id;
-    
+
     BootstrapDialog.show({
         title: 'View Resume',
         size: 'size-wide',
@@ -780,4 +780,43 @@ $('.collaps').bind('collapse', function (evt) {
     evt.stopPropagation();
 });
 
+/*
+ * For Toggling resume statuses
+ **/
+
+$(".toggle-processing-status").on("click", "a", function (e) {
+    e.preventDefault();
+    var $t = $(this);
+    var status_class = $(this).attr("class");
+    var status_text = $(this).text();
+    var resume_id = $(this).parent().parent().parent().parent().parent().parent().parent().find(".resume_id").val();
+    var employer_id = $(this).parent().parent().parent().parent().parent().parent().parent().find(".employer_id").val();
+    $.ajax({
+        url: "/wp-admin/admin-ajax.php",
+        type: "POST",
+        data: "resume_id=" + resume_id + "&employer_id=" + employer_id + "&resume_status=" + status_class + "&status_text=" + status_text + "&action=change_resume_statuses",
+        beforeSend: function () {
+
+        },
+        success: function (data) {
+            domain = window.location.href;
+            data_length = data.length - 1;
+            response = data.substr(0, data_length);
+            $t.parent().html(response);
+            $("#employer_evaluation").load(domain + " #employer_evaluation #jobs_dropdown_div,#employer_evaluation .resumes", function () {
+                toggle_processing_statuses();
+                job_drop_down_func();
+            });
+            $("#employer_resumes").load(domain + " #employer_resumes h3,#employer_resumes .resumes", function () {
+                toggle_processing_statuses();
+            });
+        },
+        error: function (xhr, status, error) {
+            alert(xhr.responseText);
+        }
+    }); //ajax*/
+
+
+
+});
 
