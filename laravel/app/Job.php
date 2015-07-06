@@ -39,6 +39,6 @@ class Job extends Model {
     //protected $hidden = ['password', 'remember_token'];
 
     public function user(){
-        return $this->belongsTo('User', 'id', 'user_id');
+        return $this->belongsTo('App\User', 'id', 'user_id');
     }
 }

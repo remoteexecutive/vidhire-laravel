@@ -31,10 +31,10 @@ class JobMap extends Model {
     //protected $hidden = ['password', 'remember_token'];
 
     public function job(){
-        return $this->belongsTo('Job','id', 'job_id');
+        return $this->belongsTo('App\Job','id', 'job_id');
     }
 
     public function resume(){
-        return $this->belongsTo('Resume', 'id', 'resume_id');
+        return $this->belongsTo('App\Resume', 'id', 'resume_id');
     }
 }

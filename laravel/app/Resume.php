@@ -45,14 +45,14 @@ class Resume extends Model {
     //protected $hidden = ['password', 'remember_token'];
 
     public function user(){
-        return $this->belongsTo('User', 'id', 'user_id');
+        return $this->belongsTo('App\User', 'id', 'user_id');
     }
 
     public function jobMap(){
-        return $this->hasOne('JobMap','resume_id', 'id');
+        return $this->hasOne('App\JobMap','resume_id', 'id');
     }
 
     public function resumeStatus(){
-        return $this->hasOne('ResumeStatus', 'resume_id', 'id');
+        return $this->hasOne('App\ResumeStatus', 'resume_id', 'id');
     }
 }
