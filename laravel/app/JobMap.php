@@ -29,11 +29,12 @@ class JobMap extends Model {
      * @var array
      */
     //protected $hidden = ['password', 'remember_token'];
-     /**
-     * A Job Mapping belongs to a Resume and a Job
-     */
-    
-    public function jobMap() {
-        return $this->hasManyThrough('App\Resume','App\Job','resume_id','job_id');
+
+    public function job(){
+        return $this->belongsTo('App\Job','id', 'job_id');
+    }
+
+    public function resume(){
+        return $this->belongsTo('App\Resume', 'id', 'resume_id');
     }
 }

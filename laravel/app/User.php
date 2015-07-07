@@ -32,21 +32,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
-    
-    /**
-     * A User can have only 1 Resume if 
-     * He/She is a Jobseeker
-     * 
-     */
-    public function resume() {
-        return $this->hasOne('App\Resume');
+
+    public function resume(){
+        return $this->hasOne('App\Resume','user_id', 'id');
     }
-    
-    /**
-     * A User can have only have Multiple Jobs if 
-     * He/She is a Employer
-     */
-    public function job() {
-        return $this->hasMany('App\Job');
+
+    public function job(){
+        return $this->hasOne('App\Job', 'user_id', 'id');
+    }
+
+    public function jobs(){
+        return $this->hasMany('App\Job', 'user_id', 'id');
     }
 }

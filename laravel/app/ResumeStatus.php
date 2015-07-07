@@ -32,7 +32,9 @@ class ResumeStatus extends Model {
      /**
      * One Resume Status Entry for One Resume
      */
-    public function resume() {
-        $this->belongsTo('App\Resume');
+    //protected $hidden = ['password', 'remember_token'];
+
+    public function resume(){
+        return $this->belongsTo('App\Resume', 'id', 'resume_id');
     }
 }

@@ -35,15 +35,9 @@ class Job extends Model {
      * A Job belongs to One User if He/She
      * is an Employer
      */
-    public function user() {
-        return $this->belongsTo('App\User');
+    //protected $hidden = ['password', 'remember_token'];
+
+    public function user(){
+        return $this->belongsTo('App\User', 'id', 'user_id');
     }
-    
-    /**
-     * A Job can be mapped to many Resumes
-     */
-    public function resume() {
-        return $this->hasMany('App\Resume');
-    }
-    
 }

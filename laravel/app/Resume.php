@@ -47,36 +47,17 @@ class Resume extends Model {
     /**
      * One Resume Status Entry for One Resume
      */
-    public function resumeStatus() {
-        return $this->hasOne('App\ResumeStatus');
+    //protected $hidden = ['password', 'remember_token'];
+
+    public function user(){
+        return $this->belongsTo('App\User', 'id', 'user_id');
     }
-    
-    /**
-     * A Resume has 3 Career Map entries
-     * (Most Recent, 2nd Most Recent, Third Most Recent)
-     * using the user_id
-     * @var user_id
-     */
-    public function careerMap() {
-        return $this->hasMany('App\CareerMap','user_id');
+
+    public function jobMap(){
+        return $this->hasOne('App\JobMap','resume_id', 'id');
     }
-    /**
-     * A Resume has 1 Video Evaluation
-     */
-    public function videoEvaluation() {
-        return $this->hasOne('App\VideoEvaluation');
-    }
-    
-    /**
-     * A Resume has 1 Final Evaluation
-     */
-    public function finalEvaluation() {
-        return $this->hasOne('App\FinalEvaluation');
-    }
-    /**
-     * A Resume has 1 Reference Response Entry
-     */
-    public function referenceResponse() {
-        return $this->hasOne('App\ReferenceResponse');
+
+    public function resumeStatus(){
+        return $this->hasOne('App\ResumeStatus', 'resume_id', 'id');
     }
 }
