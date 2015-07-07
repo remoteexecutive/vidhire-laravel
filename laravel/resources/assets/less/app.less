@@ -790,7 +790,7 @@ footer {
             zoom: 1;
             margin: 0 0 10px 0;
             //padding: 15px;
-            list-style: none outside;
+            list-style: none;
             background-color: #fbfbfb;
             height: auto;
             width: @dashboard-resume-list-item-width;
@@ -800,6 +800,11 @@ footer {
             a {
                 color: #E34F00; 
             }
+            
+            ul {
+                list-style: none;
+            }
+
     .photo {
         width: 150px;
         height: 80px;
@@ -818,6 +823,7 @@ footer {
 
     .toggle-processing-status a{
         font-size: 9px;
+        list-style:none;
     }
 
     .final-evaluation-rating {
@@ -847,7 +853,7 @@ footer {
         position: relative;
         left: 15px;
     }
-
+   
     }
 
 }
@@ -1354,6 +1360,7 @@ footer {
       .contact-information {
         li {
             padding: 5px;
+            display: initial;
         }
         
     .su-box-title {

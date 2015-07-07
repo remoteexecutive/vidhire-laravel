@@ -376,6 +376,11 @@ class EditController extends Controller {
             'job_id' => $job_id,
             'resume_id' => $resume_id
         ]);
+        
+        DB::table('resume_statuses')->insert([
+            'job_id' => $job_id,
+            'resume_id' => $resume_id
+        ]);
 
         return $message;
     }
@@ -394,12 +399,38 @@ class EditController extends Controller {
         DB::table('job_map')->where('resume_id', $resume_id)
                 ->where('job_id', $job_id)
                 ->delete();
+        
+        DB::table('resume_statuses')->where('resume_id', $resume_id)
+                ->where('job_id', $job_id)
+                ->delete();
 
         $message = "Unlinked User from Job";
 
         return $message;
     }
 
+    /**
+     * Toggle Resume Status
+     *
+     * @param  string $resume_id
+     * @param  string $job_id
+     * @param  string $field_name
+     * @param  string $toggled_data
+     * @return true
+     */
+    public function toggleResumeStatus($resume_id,$job_id,$field_name,$toggled_data) {
+        
+        DB::table('resume_statuses')->update(
+                    [
+                       $field_name => $toggled_data
+                    ]
+            )->where('resume_id', $resume_id)
+             ->where('job_id', $job_id);
+        
+        return true;
+    }
+    
+    
     /**
      * Get the Resume
      *

@@ -38,11 +38,11 @@ class CareerMap extends Model
         'reference_phone_number',
         'reference_position',
         'notes'];
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    //protected $hidden = ['password', 'remember_token'];
+  
+     /**
+      * 3 Career Map Entries with different employees is associated with 1 resume 
+      ***/
+     public function resume() {
+         return $this->belongsTo('App\Resume');
+     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use DB;
 use App\User;
+use App\CareerMap;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Validation\Validator;
@@ -32,11 +32,6 @@ class UserController extends Controller {
 
         if (Auth::attempt(['username' => $username, 'password' => $pass])) {
 
-            //$users = DB::table('users')->where('username', $username)->first();
-            
-            //return redirect()->route('dashboard', ['name' => $users->first_name, 'user' => $users->user_type]);
-            //return view('dashboard',['name' => $users->first_name, 'user' => $users->user_type,'resume' => $resume]);
-            //return redirect()->route('dashboard',['name' => $users->first_name, 'user' => $users->user_type]);
             return redirect()->route('dashboard');
             
         } else {
@@ -45,7 +40,7 @@ class UserController extends Controller {
     }
 
     /**
-     * register user 
+     * Register user 
      * 
      * @param request $request
      * */
@@ -57,8 +52,9 @@ class UserController extends Controller {
         $first_name = $request->input('first_name');
         $last_name = $request->input('last_name');
         $user_type = $request->input('user_type');
-
-        User::create([
+ 
+        //Create a new User
+        $user = new User([
             'username' => $username,
             'first_name' => $first_name,
             'last_name' => $last_name,
@@ -66,39 +62,26 @@ class UserController extends Controller {
             'user_type' => $user_type,
             'password' => bcrypt($pass)
         ]);
-
+            
+        $user->save();
+        
         if (Auth::attempt(['username' => $username, 'password' => $pass])) {
-
-            $users = DB::table('users')->where('username', $username)->first();
 
             if ($user_type == 'Jobseeker') {
 
-                //Upon Registration, 
-                DB::table('resume')->insert(
-                        [
-                            'user_id' => $request->user()->id,
-                            'rate' => '',
-                            'currency' => '',
-                            'location' => '',
-                            'email' => '',
-                            'phone' => '',
-                            'mobile' => '',
-                            'skype' => '',
-                            'resume_photo' => '',
-                            'resume_doc' => '',
-                            'additional_doc' => '',
-                            'overall_average' => '',
-                            'transcripts' => '',
-                            'degree' => '',
-                            'institution' => '',
-                            'year_issued' => '',
-                            'skills' => '',
-                            'interview_video_link' => ''
-                        ]
-                );
+                //Upon Registration, Add a blank Resume
+                $resume = $user->resume()->create(['user_id' => $user->id]);
+                $resume->save();
+                //Save the Career Map
+                $resume->careerMap()->saveMany([
+                    new CareerMap(['employment' => 'Most Recent']),
+                    new CareerMap(['employment' => '2nd Most Recent']),
+                    new CareerMap(['employment' => '3rd Most Recent'])
+                ]);
+                
             }
             
-            return redirect()->route('dashboard', ['name' => $users->first_name, 'user' => $users->user_type]);
+            return redirect()->route('dashboard', ['name' => $user->first_name, 'user' => $user->user_type]);
         } else {
             return redirect()->route('home');
         }

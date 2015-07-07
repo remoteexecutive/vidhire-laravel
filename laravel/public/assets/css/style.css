@@ -409,7 +409,7 @@ footer {
   overflow: hidden;
   zoom: 1;
   margin: 0 0 10px 0;
-  list-style: none outside;
+  list-style: none;
   background-color: #fbfbfb;
   height: auto;
   width: 106%;
@@ -418,6 +418,9 @@ footer {
 }
 #employer-evaluation .resume a {
   color: #E34F00;
+}
+#employer-evaluation .resume ul {
+  list-style: none;
 }
 #employer-evaluation .resume .photo {
   width: 150px;
@@ -434,6 +437,7 @@ footer {
 }
 #employer-evaluation .resume .toggle-processing-status a {
   font-size: 9px;
+  list-style: none;
 }
 #employer-evaluation .resume .final-evaluation-rating {
   float: right;
@@ -1281,7 +1285,7 @@ footer {
   list-style: none;
 }
 .accordion-notes div {
-  background-color: #99dc26;
+  background-color: #807323;
 }
 .edit-job .edit-job-container {
   background-color: #fbfbfb;
@@ -1539,11 +1543,9 @@ footer {
   color: #fff;
   border-radius: 15px;
 }
-.single-resume .resume-container .contact-information ul {
-  list-style: none;
-}
-.single-resume .resume-container .contact-information ul li {
+.single-resume .resume-container .contact-information li {
   padding: 5px;
+  display: initial;
 }
 .single-resume .resume-container .contact-information .su-box-title {
   /* FF3.6+ */

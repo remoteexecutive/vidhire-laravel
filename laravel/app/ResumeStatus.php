@@ -20,7 +20,6 @@ class ResumeStatus extends Model {
      */
     protected $fillable = [
         'resume_id',
-        'employer_id',
         'job_id',
         'tracking',
         'references',
@@ -30,10 +29,10 @@ class ResumeStatus extends Model {
         'rating'
     ];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
+     /**
+     * One Resume Status Entry for One Resume
      */
-    //protected $hidden = ['password', 'remember_token'];
+    public function resume() {
+        $this->belongsTo('App\Resume');
+    }
 }

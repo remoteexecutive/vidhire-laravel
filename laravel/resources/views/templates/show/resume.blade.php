@@ -1,5 +1,13 @@
+
+
 <div class="row">
     <div class="resume-container col-md-12">
+        <input type="hidden" name="resume_id" value="{{$resume->id}}" />
+        @if(isset($job_id))
+        <input type="hidden" name="job_id" value="{{$job_id}}" />
+        @else
+        <input type="hidden" name="job_id" value="" />
+        @endif
         <div class="section_header">                        
             <h1 class="title resume-title">{{$resume->first_name}}&nbsp;{{$resume->last_name}}</h1>
             <div class="space"></div>
@@ -42,16 +50,154 @@
                 @if($user == 'Employer')
                 <div class="col-md-4">
                     <div class="resume-statuses">
-                        <div>
-                            <ul class="list-group toggle-processing-status" style="font-size: 12px;">
-                                <li class="list-group-item fast-track"><img class="green-checked" height="16" width="16" src="//vidhire.net/wp-content/themes/vidhire/images/green-check-mark.png"><a href="?fast-track=insufficient&amp;resume_id=57" class="fast-track">Fast Tracked</a></li>
-                                <li class="list-group-item reference-checked"><a href="?reference-checked=false&amp;resume_id=57" class="reference-checked"><img class="green-checked" height="16" width="16" src="//vidhire.net/wp-content/themes/vidhire/images/green-check-mark.png">References Checked</a></li>
-                                <li class="list-group-item highest-rated"><a href="?star-resume=unrated&amp;resume_id=57" class="highest-rated"><img class="green-checked" height="16" width="16" src="//vidhire.net/wp-content/themes/vidhire/images/green-check-mark.png">Highest Rated</a></li>						          
-                                <li class="list-group-item video-interview-evaluated"><a href="?video-interview-evaluated=false&amp;resume_id=57" class="video-interview-evaluated"><img class="green-checked" height="16" width="16" src="//vidhire.net/wp-content/themes/vidhire/images/green-check-mark.png">Video Evaluated</a></li>
-                                <li class="list-group-item no-red-flags"><a href="?no-red-flags=checking&amp;resume_id=57" class="no-red-flags"><img class="green-checked" height="16" width="16" src="//vidhire.net/wp-content/themes/vidhire/images/green-check-mark.png">No Red Flags</a></li>
-                                <li class="list-group-item completed-evaluation"><a href="?completed-evaluation=false&amp;resume_id=57" class="completed-evaluation"><img class="green-checked" height="16" width="16" src="//vidhire.net/wp-content/themes/vidhire/images/green-check-mark.png">Completed Evaluation</a></li>
-                            </ul><!--toggle-processing-status-->
-                        </div>
+                        <ul class="list-group toggle-processing-status" style="font-size: 12px;">
+                            <li class="list-group-item">
+                                <img class="tracking-img" height="16" width="16" src="{{asset('assets/images/orange-check.png')}}">
+                                <a href="#" class="tracking">Standard Tracked</a>
+                            </li>
+                            <li class="list-group-item">
+                                <img class="references-img" height="16" width="16" src="{{asset('assets/images/orange-check.png')}}">
+                                <a href="#" class="references">Check Reference</a>    
+                            </li>
+                            <li class="list-group-item">
+                                <img class="rating-img" height="16" width="16" src="{{asset('assets/images/orange-check.png')}}">
+                                <a href="#" class="rating">Pick</a>
+                            </li>						          
+                            <li class="list-group-item">
+                                <img class="video-img" height="16" width="16" src="{{asset('assets/images/red-check.gif')}}">
+                                <a href="#" class="video">No Video</a>
+                            </li>
+                            <li class="list-group-item">
+                                <img class="flags-img" height="16" width="16" src="{{asset('assets/images/red-check.gif')}}">
+                                <a href="#" class="flags">Check For Red Flags</a>
+                            </li>
+                            <li class="list-group-item">
+                                <img class="evaluation-img" height="16" width="16" src="{{asset('assets/images/orange-check.png')}}">
+                                <a href="#" class="evaluation">Evaluate</a>
+                            </li>
+                        </ul><!--toggle-processing-status-->
+                        <script type='text/javascript'>
+                            /*
+                             * For Toggling resume statuses
+                             **/
+                            $(".toggle-processing-status li a").click(function () {
+                                var resume_id = $(".resume-container input[name=resume_id]").val();
+                                var job_id = $(".resume-container input[name=job_id]").val();
+                                var ajaxurl = '/toggle-resume-status';
+
+
+                                if ($(this).attr('class') === 'tracking') {
+                                    //$(this).text($(this).text() == 'Standard Tracked' ? 'Fast Tracked' : 'Standard Tracked');
+                                    
+                                     switch ($(this).text()) {
+                                        case 'Standard Tracked' :
+                                            $(this).text('Fast Tracked');
+                                            $('.tracking-img').attr('src','/assets/images/green-check.png');
+                                            break;
+                                        default:
+                                            $(this).text('Standard Tracked');
+                                            $('.tracking-img').attr('src','/assets/images/orange-check.png');
+                                            break;
+
+                                    }
+                                }
+
+                                if ($(this).attr('class') === 'references') {
+                                    //$(this).text($(this).text() == 'Check Reference' ? 'References Checked' : 'Check Reference');
+                                    
+                                     switch ($(this).text()) {
+                                        case 'Check Reference' :
+                                            $(this).text('References Checked');
+                                            $('.references-img').attr('src','/assets/images/green-check.png');
+                                            break;
+                                        default:
+                                            $(this).text('Check Reference');
+                                            $('.references-img').attr('src','/assets/images/orange-check.png');
+                                            break;
+
+                                    }
+                                }
+
+                                if ($(this).attr('class') === 'rating') {
+                                    //$(this).text($(this).text() == 'Pick' ? '2nd Highest Rated' : 'Highest Rated');
+
+                                    switch ($(this).text()) {
+                                        case 'Pick' :
+                                            $(this).text('2nd Highest Rated');
+                                            $('.rating-img').attr('src','/assets/images/green-check.png');
+                                            break;
+                                        case '2nd Highest Rated' :
+                                            $(this).text('Highest Rated');
+                                            $('.rating-img').attr('src','/assets/images/green-check.png');
+                                            break;
+                                        default:
+                                            $(this).text('Pick');
+                                            $('.rating-img').attr('src','/assets/images/orange-check.png');
+                                            break;
+
+                                    }
+
+                                    //BootstrapDialog.alert($(this).text());
+                                }
+
+                                if ($(this).attr('class') === 'video') {
+
+                                    switch ($(this).text()) {
+                                        case 'No Video' :
+                                            $(this).text('Video Submitted');
+                                            $('.video-img').attr('src','/assets/images/orange-check.png');
+                                            break;
+                                        case 'Video Submitted' :
+                                            $(this).text('Video Evaluated');
+                                            $('.video-img').attr('src','/assets/images/green-check.png');
+                                            break;
+                                        default:
+                                            $(this).text('No Video');
+                                            $('.video-img').attr('src','/assets/images/red-check.gif');
+                                            break;
+                                    }
+                                }
+                                
+                                if ($(this).attr('class') === 'flags') {
+                                    
+                                    switch($(this).text()) {
+                                        case 'Check For Red Flags' :
+                                            $(this).text('Red Flagged');
+                                            $('.flags-img').attr('src','/assets/images/red-check.gif');
+                                         break;
+                                     case 'Red Flagged' :
+                                         $(this).text('No Red Flags');
+                                         $('.flags-img').attr('src','/assets/images/green-check.png');
+                                         break;
+                                    default: $(this).text('Check For Red Flags');
+                                        $('.flags-img').attr('src','/assets/images/orange-check.png');
+                                        break;
+                                }
+                            }
+                            
+                             if ($(this).attr('class') === 'evaluation') {
+                                    
+                                    switch($(this).text()) {
+                                        case 'Evaluate' :
+                                            $(this).text('Completed Evaluation');
+                                            $('.evaluation-img').attr('src','/assets/images/green-check.png');
+                                         break;
+                                     case 'Completed Evaluation' :
+                                         $(this).text('Hired');
+                                         $('.evaluation-img').attr('src','/assets/images/green-check.png');
+                                         break;
+                                    default: $(this).text('Evaluate');
+                                        $('.evaluation-img').attr('src','/assets/images/orange-check.png');
+                                        break;
+                                }
+                            }
+
+
+                            });
+                        
+                        
+                        
+                        </script>
                     </div>
                 </div>
                 @endif
@@ -636,27 +782,21 @@
                                 //For Google Maps
                                 var geocoder;
                                 var map;
-
                                 function initialize() {
                                     geocoder = new google.maps.Geocoder();
-
                                     raw_address = document.getElementById('geolocation-latLng').value;
                                     address = raw_address.split(',');
-
                                     var latlng = new google.maps.LatLng(address[0], address[1]);
                                     var mapOptions = {
                                         zoom: 9,
                                         center: latlng,
                                         mapTypeId: google.maps.MapTypeId.ROADMAP
                                     };
-
                                     map = new google.maps.Map(document.getElementById("googleMapResume"), mapOptions);
-
                                     var marker = new google.maps.Marker({
                                         map: map,
                                         position: latlng
                                     });
-
                                 }
                                 google.maps.event.addDomListener(window, 'load', initialize);
 

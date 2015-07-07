@@ -69,3 +69,6 @@ Route::post('/edit-resume','EditController@editResume');
 Route::post('/invite-to-job','EditController@inviteToJob');
 /*Unlink from a Job*/
 Route::get('/unlink-from-job/{resume_id}/{job_id}','EditController@unlinkFromJob');
+
+/*Resume Status Toggling*/
+Route::get('/toggle-resume-status/{resume_id}/{job_id}/{field_name}/{data}','EditController@toggleResumeStatus');

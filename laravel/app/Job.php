@@ -32,9 +32,18 @@ class Job extends Model {
     ];
 
     /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
+     * A Job belongs to One User if He/She
+     * is an Employer
      */
-    //protected $hidden = ['password', 'remember_token'];
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
+    
+    /**
+     * A Job can be mapped to many Resumes
+     */
+    public function resume() {
+        return $this->hasMany('App\Resume');
+    }
+    
 }

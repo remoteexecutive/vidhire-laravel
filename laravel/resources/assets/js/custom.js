@@ -783,40 +783,149 @@ $('.collaps').bind('collapse', function (evt) {
 /*
  * For Toggling resume statuses
  **/
+$(".toggle-processing-status li a").click(function () {
+    var resume_id = $("input[name=resume_id]").val();
+    var job_id = $("input[name=resume_job_id]").val();
+    
+    if ($(this).attr('class') === 'tracking') {
+        //$(this).text($(this).text() == 'Standard Tracked' ? 'Fast Tracked' : 'Standard Tracked');
 
-$(".toggle-processing-status").on("click", "a", function (e) {
-    e.preventDefault();
-    var $t = $(this);
-    var status_class = $(this).attr("class");
-    var status_text = $(this).text();
-    var resume_id = $(this).parent().parent().parent().parent().parent().parent().parent().find(".resume_id").val();
-    var employer_id = $(this).parent().parent().parent().parent().parent().parent().parent().find(".employer_id").val();
+        switch ($(this).text()) {
+            case 'Standard Tracked' :
+                $(this).text('Fast Tracked');
+                $('.tracking-img').attr('src', '/assets/images/green-check.png');
+                break;
+            default:
+                $(this).text('Standard Tracked');
+                $('.tracking-img').attr('src', '/assets/images/orange-check.png');
+                break;
+
+        }
+    }
+
+    if ($(this).attr('class') === 'references') {
+        //$(this).text($(this).text() == 'Check Reference' ? 'References Checked' : 'Check Reference');
+
+        switch ($(this).text()) {
+            case 'Check Reference' :
+                $(this).text('References Checked');
+                $('.references-img').attr('src', '/assets/images/green-check.png');
+                break;
+            default:
+                $(this).text('Check Reference');
+                $('.references-img').attr('src', '/assets/images/orange-check.png');
+                break;
+
+        }
+    }
+
+    if ($(this).attr('class') === 'rating') {
+        //$(this).text($(this).text() == 'Pick' ? '2nd Highest Rated' : 'Highest Rated');
+
+        switch ($(this).text()) {
+            case 'Pick' :
+                $(this).text('2nd Highest Rated');
+                $('.rating-img').attr('src', '/assets/images/green-check.png');
+                break;
+            case '2nd Highest Rated' :
+                $(this).text('Highest Rated');
+                $('.rating-img').attr('src', '/assets/images/green-check.png');
+                break;
+            default:
+                $(this).text('Pick');
+                $('.rating-img').attr('src', '/assets/images/orange-check.png');
+                break;
+
+        }
+
+        //BootstrapDialog.alert($(this).text());
+    }
+
+    if ($(this).attr('class') === 'video') {
+
+        switch ($(this).text()) {
+            case 'No Video' :
+                $(this).text('Video Submitted');
+                $('.video-img').attr('src', '/assets/images/orange-check.png');
+                break;
+            case 'Video Submitted' :
+                $(this).text('Video Evaluated');
+                $('.video-img').attr('src', '/assets/images/green-check.png');
+                break;
+            default:
+                $(this).text('No Video');
+                $('.video-img').attr('src', '/assets/images/red-check.gif');
+                break;
+        }
+    }
+
+    if ($(this).attr('class') === 'flags') {
+
+        switch ($(this).text()) {
+            case 'Check For Red Flags' :
+                $(this).text('Red Flagged');
+                $('.flags-img').attr('src', '/assets/images/red-check.gif');
+                break;
+            case 'Red Flagged' :
+                $(this).text('No Red Flags');
+                $('.flags-img').attr('src', '/assets/images/green-check.png');
+                break;
+            default:
+                $(this).text('Check For Red Flags');
+                $('.flags-img').attr('src', '/assets/images/orange-check.png');
+                break;
+        }
+    }
+
+    if ($(this).attr('class') === 'evaluation') {
+
+        switch ($(this).text()) {
+            case 'Evaluate' :
+                $(this).text('Completed Evaluation');
+                $('.evaluation-img').attr('src', '/assets/images/green-check.png');
+                break;
+            case 'Completed Evaluation' :
+                $(this).text('Hired');
+                $('.evaluation-img').attr('src', '/assets/images/green-check.png');
+                break;
+            default:
+                $(this).text('Evaluate');
+                $('.evaluation-img').attr('src', '/assets/images/orange-check.png');
+                break;
+        }
+    }
+    var field_name = $(this).attr('class');
+    var toggle_data = $(this).text();
+    var ajaxurl = '/toggle-resume-status/'+resume_id+'/'+job_id+'/'+field_name+'/'+toggle_data;
+
+
     $.ajax({
-        url: "/wp-admin/admin-ajax.php",
-        type: "POST",
-        data: "resume_id=" + resume_id + "&employer_id=" + employer_id + "&resume_status=" + status_class + "&status_text=" + status_text + "&action=change_resume_statuses",
+        url: ajaxurl,
+        type: "GET",
+        // THIS MUST BE DONE FOR FILE UPLOADING
+        contentType: false,
+        processData: false,
         beforeSend: function () {
 
         },
         success: function (data) {
-            domain = window.location.href;
-            data_length = data.length - 1;
-            response = data.substr(0, data_length);
-            $t.parent().html(response);
-            $("#employer_evaluation").load(domain + " #employer_evaluation #jobs_dropdown_div,#employer_evaluation .resumes", function () {
-                toggle_processing_statuses();
-                job_drop_down_func();
-            });
-            $("#employer_resumes").load(domain + " #employer_resumes h3,#employer_resumes .resumes", function () {
-                toggle_processing_statuses();
-            });
+            /*BootstrapDialog.show({
+             message: 'Invite Sent',
+             buttons: [{
+             label: 'Ok',
+             action: function () {
+             window.location.replace(getBaseURL());
+             }
+             }]
+             });*/
+            BootstrapDialog.alert(data);
+            dialog.close();
         },
         error: function (xhr, status, error) {
-            alert(xhr.responseText);
+            //alert(xhr.responseText);
         }
-    }); //ajax*/
+    }); //ajax
 
 
 
 });
-
