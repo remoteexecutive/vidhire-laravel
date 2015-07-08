@@ -63,7 +63,6 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
 
     <!--Custom Javascript-->
-    
     <script src="{!! asset('assets/js/custom.js') !!}"></script>
 </body>
 </html>

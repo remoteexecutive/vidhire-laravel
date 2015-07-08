@@ -772,21 +772,19 @@ function getYoutubePlayer() {
 
 }
 
-
 $('.collaps').bind('expand', function (evt) {
     evt.stopPropagation();
 });
 $('.collaps').bind('collapse', function (evt) {
     evt.stopPropagation();
 });
-
 /*
  * For Toggling resume statuses
  **/
 $(".toggle-processing-status li a").click(function () {
     var resume_id = $("input[name=resume_id]").val();
     var job_id = $("input[name=resume_job_id]").val();
-    
+
     if ($(this).attr('class') === 'tracking') {
         //$(this).text($(this).text() == 'Standard Tracked' ? 'Fast Tracked' : 'Standard Tracked');
 
@@ -841,7 +839,7 @@ $(".toggle-processing-status li a").click(function () {
         //BootstrapDialog.alert($(this).text());
     }
 
-    if ($(this).attr('class') === 'video') {
+    if ($(this).attr('class') === 'video_interview') {
 
         switch ($(this).text()) {
             case 'No Video' :
@@ -896,8 +894,7 @@ $(".toggle-processing-status li a").click(function () {
     }
     var field_name = $(this).attr('class');
     var toggle_data = $(this).text();
-    var ajaxurl = '/toggle-resume-status/'+resume_id+'/'+job_id+'/'+field_name+'/'+toggle_data;
-
+    var ajaxurl = '/toggle-resume-status/' + resume_id + '/' + job_id + '/' + field_name + '/' + toggle_data;
 
     $.ajax({
         url: ajaxurl,
@@ -925,7 +922,4 @@ $(".toggle-processing-status li a").click(function () {
             //alert(xhr.responseText);
         }
     }); //ajax
-
-
-
 });

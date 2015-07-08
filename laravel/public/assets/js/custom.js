@@ -841,7 +841,7 @@ $(".toggle-processing-status li a").click(function () {
         //BootstrapDialog.alert($(this).text());
     }
 
-    if ($(this).attr('class') === 'video') {
+    if ($(this).attr('class') === 'video_interview') {
 
         switch ($(this).text()) {
             case 'No Video' :

@@ -12,6 +12,43 @@
             <h1 class="title resume-title">{{$resume->first_name}}&nbsp;{{$resume->last_name}}</h1>
             <div class="space"></div>
             <div class="row">
+                @if($user == 'Jobseeker')
+                <div class="col-md-6">
+                    <div class="application-job">
+                        <div>
+                            <div class="resume-pic-container">
+                                <div class="space"></div>
+                                <img width="150" height="150" src="{{$resume->resume_photo}}" alt="Resume Photo">
+                            </div>
+                            <div class="space"></div>
+                            <ul>
+                                <li>
+                                    Minimum Hourly Rate: <strong>{{$resume->rate}}&nbsp;{{$resume->currency}}</strong> 
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="contact-information">
+                        <div>
+                            <div class="space"></div>
+                            <ul>
+                                <li> 
+                                    <i class="fa fa-envelope"></i>
+                                    &nbsp;
+                                    <strong>
+                                        <a href="mailto:{{$resume->email}}?subject=Your Resume on VidHire">{{$resume->email}}</a>
+                                    </strong>
+                                </li>
+                                <li ><i class="fa fa-phone"></i>&nbsp;<strong>{{$resume->phone}}</strong></li>
+                                <li ><i class="fa fa-mobile"></i>&nbsp;<strong>{{$resume->mobile}}</strong></li>
+                                <li ><i class="fa fa-skype"></i>&nbsp;<a href="skype">{{$resume->skype}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                @else
                 <div class="col-md-4">
                     <div class="application-job">
                         <div>
@@ -47,35 +84,65 @@
                         </div>
                     </div>
                 </div>
-                @if($user == 'Employer')
+                @endif
+                @if($user == 'Employer' && isset($resume_statuses))
                 <div class="col-md-4">
                     <div class="resume-statuses">
                         <ul class="list-group toggle-processing-status" style="font-size: 12px;">
                             <li class="list-group-item">
+                                @if($resume_statuses->tracking == 'Standard Tracked')
                                 <img class="tracking-img" height="16" width="16" src="{{asset('assets/images/orange-check.png')}}">
-                                <a href="#" class="tracking">Standard Tracked</a>
+                                @else
+                                <img class="tracking-img" height="16" width="16" src="{{asset('assets/images/green-check.png')}}">
+                                @endif
+                                <a href="#" class="tracking">{{$resume_statuses->tracking}}</a>
                             </li>
                             <li class="list-group-item">
+                                @if($resume_statuses->references == 'Check Reference')
                                 <img class="references-img" height="16" width="16" src="{{asset('assets/images/orange-check.png')}}">
-                                <a href="#" class="references">Check Reference</a>    
+                                @else
+                                <img class="references-img" height="16" width="16" src="{{asset('assets/images/green-check.png')}}">
+                                @endif
+                                <a href="#" class="references">{{$resume_statuses->references}}</a>    
                             </li>
                             <li class="list-group-item">
+                                @if($resume_statuses->rating == 'Pick')
                                 <img class="rating-img" height="16" width="16" src="{{asset('assets/images/orange-check.png')}}">
-                                <a href="#" class="rating">Pick</a>
+                                @else
+                                <img class="rating-img" height="16" width="16" src="{{asset('assets/images/green-check.png')}}">
+                                @endif
+                                <a href="#" class="rating">{{$resume_statuses->rating}}</a>
                             </li>						          
                             <li class="list-group-item">
+                                @if($resume_statuses->video_interview == 'No Video')
                                 <img class="video-img" height="16" width="16" src="{{asset('assets/images/red-check.gif')}}">
-                                <a href="#" class="video">No Video</a>
+                                @elseif($resume_statuses->video_interview == 'Video Submitted') 
+                                <img class="video-img" height="16" width="16" src="{{asset('assets/images/orange-check.png')}}">
+                                @else
+                                <img class="video-img" height="16" width="16" src="{{asset('assets/images/green-check.png')}}">
+                                @endif
+                                <a href="#" class="video_interview">{{$resume_statuses->video_interview}}</a>
                             </li>
                             <li class="list-group-item">
+                                @if($resume_statuses->flags == 'Check For Red Flags')
+                                <img class="flags-img" height="16" width="16" src="{{asset('assets/images/orange-check.png')}}">
+                                @elseif($resume_statuses->flags == 'Red Flagged') 
                                 <img class="flags-img" height="16" width="16" src="{{asset('assets/images/red-check.gif')}}">
-                                <a href="#" class="flags">Check For Red Flags</a>
+                                @else
+                                <img class="flags-img" height="16" width="16" src="{{asset('assets/images/green-check.png')}}">
+                                @endif
+                                <a href="#" class="flags">{{$resume_statuses->flags}}</a>
                             </li>
                             <li class="list-group-item">
+                                @if($resume_statuses->evaluation == 'Evaluate')
                                 <img class="evaluation-img" height="16" width="16" src="{{asset('assets/images/orange-check.png')}}">
-                                <a href="#" class="evaluation">Evaluate</a>
+                                @else
+                                <img class="evaluation-img" height="16" width="16" src="{{asset('assets/images/green-check.png')}}">
+                                @endif
+                                <a href="#" class="evaluation">{{$resume_statuses->evaluation}}</a>
                             </li>
                         </ul><!--toggle-processing-status-->
+
                         <script type='text/javascript'>
                             /*
                              * For Toggling resume statuses
@@ -83,20 +150,18 @@
                             $(".toggle-processing-status li a").click(function () {
                                 var resume_id = $(".resume-container input[name=resume_id]").val();
                                 var job_id = $(".resume-container input[name=job_id]").val();
-                                var ajaxurl = '/toggle-resume-status';
-
-
+                                
                                 if ($(this).attr('class') === 'tracking') {
                                     //$(this).text($(this).text() == 'Standard Tracked' ? 'Fast Tracked' : 'Standard Tracked');
-                                    
-                                     switch ($(this).text()) {
+
+                                    switch ($(this).text()) {
                                         case 'Standard Tracked' :
                                             $(this).text('Fast Tracked');
-                                            $('.tracking-img').attr('src','/assets/images/green-check.png');
+                                            $('.tracking-img').attr('src', '/assets/images/green-check.png');
                                             break;
                                         default:
                                             $(this).text('Standard Tracked');
-                                            $('.tracking-img').attr('src','/assets/images/orange-check.png');
+                                            $('.tracking-img').attr('src', '/assets/images/orange-check.png');
                                             break;
 
                                     }
@@ -104,15 +169,15 @@
 
                                 if ($(this).attr('class') === 'references') {
                                     //$(this).text($(this).text() == 'Check Reference' ? 'References Checked' : 'Check Reference');
-                                    
-                                     switch ($(this).text()) {
+
+                                    switch ($(this).text()) {
                                         case 'Check Reference' :
                                             $(this).text('References Checked');
-                                            $('.references-img').attr('src','/assets/images/green-check.png');
+                                            $('.references-img').attr('src', '/assets/images/green-check.png');
                                             break;
                                         default:
                                             $(this).text('Check Reference');
-                                            $('.references-img').attr('src','/assets/images/orange-check.png');
+                                            $('.references-img').attr('src', '/assets/images/orange-check.png');
                                             break;
 
                                     }
@@ -124,15 +189,15 @@
                                     switch ($(this).text()) {
                                         case 'Pick' :
                                             $(this).text('2nd Highest Rated');
-                                            $('.rating-img').attr('src','/assets/images/green-check.png');
+                                            $('.rating-img').attr('src', '/assets/images/green-check.png');
                                             break;
                                         case '2nd Highest Rated' :
                                             $(this).text('Highest Rated');
-                                            $('.rating-img').attr('src','/assets/images/green-check.png');
+                                            $('.rating-img').attr('src', '/assets/images/green-check.png');
                                             break;
                                         default:
                                             $(this).text('Pick');
-                                            $('.rating-img').attr('src','/assets/images/orange-check.png');
+                                            $('.rating-img').attr('src', '/assets/images/orange-check.png');
                                             break;
 
                                     }
@@ -140,63 +205,96 @@
                                     //BootstrapDialog.alert($(this).text());
                                 }
 
-                                if ($(this).attr('class') === 'video') {
+                                if ($(this).attr('class') === 'video_interview') {
 
                                     switch ($(this).text()) {
                                         case 'No Video' :
                                             $(this).text('Video Submitted');
-                                            $('.video-img').attr('src','/assets/images/orange-check.png');
+                                            $('.video-img').attr('src', '/assets/images/orange-check.png');
                                             break;
                                         case 'Video Submitted' :
                                             $(this).text('Video Evaluated');
-                                            $('.video-img').attr('src','/assets/images/green-check.png');
+                                            $('.video-img').attr('src', '/assets/images/green-check.png');
                                             break;
                                         default:
                                             $(this).text('No Video');
-                                            $('.video-img').attr('src','/assets/images/red-check.gif');
+                                            $('.video-img').attr('src', '/assets/images/red-check.gif');
                                             break;
                                     }
                                 }
-                                
+
                                 if ($(this).attr('class') === 'flags') {
-                                    
-                                    switch($(this).text()) {
+
+                                    switch ($(this).text()) {
                                         case 'Check For Red Flags' :
                                             $(this).text('Red Flagged');
-                                            $('.flags-img').attr('src','/assets/images/red-check.gif');
-                                         break;
-                                     case 'Red Flagged' :
-                                         $(this).text('No Red Flags');
-                                         $('.flags-img').attr('src','/assets/images/green-check.png');
-                                         break;
-                                    default: $(this).text('Check For Red Flags');
-                                        $('.flags-img').attr('src','/assets/images/orange-check.png');
-                                        break;
+                                            $('.flags-img').attr('src', '/assets/images/red-check.gif');
+                                            break;
+                                        case 'Red Flagged' :
+                                            $(this).text('No Red Flags');
+                                            $('.flags-img').attr('src', '/assets/images/green-check.png');
+                                            break;
+                                        default:
+                                            $(this).text('Check For Red Flags');
+                                            $('.flags-img').attr('src', '/assets/images/orange-check.png');
+                                            break;
+                                    }
                                 }
-                            }
-                            
-                             if ($(this).attr('class') === 'evaluation') {
-                                    
-                                    switch($(this).text()) {
+
+                                if ($(this).attr('class') === 'evaluation') {
+
+                                    switch ($(this).text()) {
                                         case 'Evaluate' :
                                             $(this).text('Completed Evaluation');
-                                            $('.evaluation-img').attr('src','/assets/images/green-check.png');
-                                         break;
-                                     case 'Completed Evaluation' :
-                                         $(this).text('Hired');
-                                         $('.evaluation-img').attr('src','/assets/images/green-check.png');
-                                         break;
-                                    default: $(this).text('Evaluate');
-                                        $('.evaluation-img').attr('src','/assets/images/orange-check.png');
-                                        break;
+                                            $('.evaluation-img').attr('src', '/assets/images/green-check.png');
+                                            break;
+                                        case 'Completed Evaluation' :
+                                            $(this).text('Hired');
+                                            $('.evaluation-img').attr('src', '/assets/images/green-check.png');
+                                            break;
+                                        default:
+                                            $(this).text('Evaluate');
+                                            $('.evaluation-img').attr('src', '/assets/images/orange-check.png');
+                                            break;
+                                    }
                                 }
-                            }
 
+                                var field_name = $(this).attr('class');
+                                var toggle_data = $(this).text();
+                                var ajaxurl = '/toggle-resume-status/' + resume_id + '/' + job_id + '/' + field_name + '/' + toggle_data;
+
+
+                                $.ajax({
+                                    url: ajaxurl,
+                                    type: "GET",
+                                    // THIS MUST BE DONE FOR FILE UPLOADING
+                                    contentType: false,
+                                    processData: false,
+                                    beforeSend: function () {
+
+                                    },
+                                    success: function (data) {
+                                        /*BootstrapDialog.show({
+                                         message: 'Invite Sent',
+                                         buttons: [{
+                                         label: 'Ok',
+                                         action: function () {
+                                         window.location.replace(getBaseURL());
+                                         }
+                                         }]
+                                         });*/
+                                        BootstrapDialog.alert(data);
+                                        dialog.close();
+                                    },
+                                    error: function (xhr, status, error) {
+                                        //alert(xhr.responseText);
+                                    }
+                                }); //ajax
 
                             });
-                        
-                        
-                        
+
+
+
                         </script>
                     </div>
                 </div>

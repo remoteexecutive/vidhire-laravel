@@ -38,19 +38,16 @@ class Resume extends Model {
     ];
 
     /**
-     * A Resume is associated with 1 User 
-     ***/
-    public function user() {
-        return $this->belongsTo('App\User');
-    }
-    
-    /**
      * One Resume Status Entry for One Resume
      */
     //protected $hidden = ['password', 'remember_token'];
 
     public function user(){
         return $this->belongsTo('App\User', 'id', 'user_id');
+    }
+    
+    public function careerMap() {
+        return $this->hasOne('App\CareerMap','user_id','id');
     }
 
     public function jobMap(){

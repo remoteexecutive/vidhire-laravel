@@ -42,11 +42,19 @@
                     <div class="col-md-4">
                         <ul class="list-group toggle-processing-status">
                             <li>
+                                @if($resume_statuses['tracking'] == 'Standard Tracked')
                                 <img class="tracking-img" height="16" width="16" src="{{asset('assets/images/orange-check.png')}}">
+                                @else
+                                <img class="tracking-img" height="16" width="16" src="{{asset('assets/images/green-check.png')}}">
+                                @endif
                                 <a href="#" class="tracking">{{$resume_statuses['tracking']}}</a>
                             </li>
                             <li>
+                                @if($resume_statuses['references'] == 'Check Reference')
                                 <img class="references-img" height="16" width="16" src="{{asset('assets/images/orange-check.png')}}">
+                                @else
+                                <img class="references-img" height="16" width="16" src="{{asset('assets/images/green-check.png')}}">
+                                @endif
                                 <a href="#" class="references">{{$resume_statuses['references']}}</a>    
                             </li>
                         </ul>
@@ -54,11 +62,22 @@
                     <div class="col-md-4">
                         <ul class="list-group toggle-processing-status">
                             <li>
+                                @if($resume_statuses['flags'] == 'Check For Red Flags')
+                                <img class="flags-img" height="16" width="16" src="{{asset('assets/images/orange-check.png')}}">
+                                @elseif($resume_statuses['flags'] == 'Red Flagged') 
                                 <img class="flags-img" height="16" width="16" src="{{asset('assets/images/red-check.gif')}}">
+                                @else
+                                <img class="flags-img" height="16" width="16" src="{{asset('assets/images/green-check.png')}}">
+                                @endif
                                 <a href="#" class="flags">{{$resume_statuses['flags']}}</a>
                             </li>
                             <li>
+                                @if($resume_statuses['evaluation'] == 'Evaluate')
                                 <img class="evaluation-img" height="16" width="16" src="{{asset('assets/images/orange-check.png')}}">
+                                @else
+                                <img class="evaluation-img" height="16" width="16" src="{{asset('assets/images/green-check.png')}}">
+                                @endif
+                                
                                 <a href="#" class="evaluation">{{$resume_statuses['evaluation']}}</a>
                             </li>
                         </ul><!--toggle-processing-status-->
@@ -66,12 +85,22 @@
                     <div class="col-md-4">
                         <ul class="list-group toggle-processing-status">
                             <li>
+                                @if($resume_statuses['rating'] == 'Pick')
                                 <img class="rating-img" height="16" width="16" src="{{asset('assets/images/orange-check.png')}}">
+                                @else
+                                <img class="rating-img" height="16" width="16" src="{{asset('assets/images/green-check.png')}}">
+                                @endif
                                 <a href="#" class="rating">{{$resume_statuses['rating']}}</a>
                             </li>						          
                             <li>
+                                @if($resume_statuses['video_interview'] == 'No Video')
                                 <img class="video-img" height="16" width="16" src="{{asset('assets/images/red-check.gif')}}">
-                                <a href="#" class="video">{{$resume_statuses['video_interview']}}</a>
+                                @elseif($resume_statuses['video_interview'] == 'Video Submitted') 
+                                <img class="video-img" height="16" width="16" src="{{asset('assets/images/orange-check.png')}}">
+                                @else
+                                <img class="video-img" height="16" width="16" src="{{asset('assets/images/green-check.png')}}">
+                                @endif
+                                <a href="#" class="video_interview">{{$resume_statuses['video_interview']}}</a>
                             </li>
                         </ul><!--toggle-processing-status-->
                     </div>
